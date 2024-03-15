@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  </head>
+  <body>
+
+    <main>
+        <div class="feed">
+            <div class="ask485">
+                ask485?
+            </div>
+
+            <form action="/" method="GET">
+                <div><input type="text" name="q" value="{{q}}"/></div>
+                <input type="submit" value="Recommend"/>
+            </form>
+
+            <div class="docs">
+                {% if noresults %}
+                    <div class="no_results">No recommendations found!</div>
+                {% else %}
+                    {% for film in films %}
+                        <div class="film_title">{{film}}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </main>
+
+	<script src="index.js"></script>
+  </body>
+</html>

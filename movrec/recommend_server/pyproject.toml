@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=64.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "recommend"
+version = "0.1.0"
+dependencies = [
+    "Flask",
+    "pycodestyle",
+    "pydocstyle",
+    "pylint",
+    "pytest",
+    "requests",
+]
+requires-python = ">=3.8"

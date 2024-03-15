@@ -1,0 +1,79 @@
+#!/bin/bash
+# frontdb
+# Stop on errors
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+# Sanity check command line options
+usage() {
+  echo "Usage: $0 (start|stop|status|restart)"
+}
+if [ $# -ne 1 ]; then
+  usage
+  exit 1
+fi
+
+start () {
+  if [[ $(pgrep -f "flask --app front run --host 0.0.0.0 --port 8000") ]]; then
+    echo "Error: front server already running"
+    exit 1
+  fi
+
+  if [ ! -f "var/film.sqlite3" ]
+	then
+		echo "Error: can't find front database var/film.sqlite3"
+    echo "Try: ./bin/filmdb create"
+		exit 1
+	fi
+
+  recommend=
+  if [[ $(pgrep -f "flask --app recommend run --host 0.0.0.0 --port 900[0-2]") ]]; then
+    echo "starting front server ..."
+    mkdir -p var/log
+    rm -f var/lob/front.log
+    flask --app front run --host 0.0.0.0 --port 8000 &> var/log/front.log &
+  else 
+    echo "Error: recommend server is not running"
+    echo "Try ./bin/recommend start"
+	  exit 1
+	fi
+}
+
+stop () {
+	echo "stopping front server ..."
+  pkill -f 'flask --app front run --host 0.0.0.0 --port 8000' || true
+}
+
+status () {
+  
+  if [[ $(pgrep -f "flask --app front run --host 0.0.0.0 --port 8000") ]]; then
+    echo "front server running"
+    exit 0
+  fi
+  echo "front server stopped"
+  exit 1
+}
+
+restart () {
+  stop
+  start
+}
+
+# Parse argument.  $1 is the first argument
+case $1 in
+        "start")
+            start
+            ;;
+        "stop")
+            stop
+            ;;
+        "status")
+            status
+            ;;
+        "restart")
+            restart
+            ;;
+          *)
+    usage
+    exit 1
+    ;;
+esac

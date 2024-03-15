@@ -1,0 +1,4 @@
+movrec/env/*
+movrec/var/*
+front_server/front.egg-info/*
+recommend/recommend.egg-info/*
