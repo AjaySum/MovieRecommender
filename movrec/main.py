@@ -3,6 +3,7 @@ import string
 import nltk
 from nltk.corpus import stopwords
 from datasets import load_dataset
+movies = load_dataset("vishnupriyavr/wiki-movie-plots-with-summaries")
 nltk.download('stopwords')
 
 def clean_movie_text(text):
@@ -35,3 +36,4 @@ if __name__ == "__main__":
         cleaned_movies.append(cleaned_movie)
 
     print("CLEANED MOVIES: ", cleaned_movies)
+
