@@ -1,23 +1,23 @@
 # Here we simply process all the text data
 # add necessary imports, including dataset
+class Movie: 
+    def __init__(self):
+        self.id = -1
+        self.title = ""
+        self.genre = ""
+        self.summary = ""
+        self.fullplot = ""
+        self.cast = []
+        self.directors = []
+        self.years = []
+
 
 class Preprocessor:
-    moviesData = "" # will store loaded dataset, will change type
-    movieIds = set()
-
-    # all dictionaries below indexed with id
-
-    titles = {} # val is plain string
-    genres = {} # val is set of genres
-    summaries = {} # val is list of words
-    fullplots = {} # val is list of words
-    cast = {} # val is list of actors
-    dirs = {} # val is list of directors
-    years = {} # val is numbers
     
-    def __init__(self):
+    def __init__(self, moviesData):
         # initialize moviesData here
-        pass
+        self.moviesData = moviesData
+        self.movies = {}
 
     def clean(self):
         # i = 0 start movie id
@@ -32,10 +32,9 @@ class Preprocessor:
         pass
     
     def printAll(self):
-        # change stdout to ids.txt
-        # loop through movieids and print id \n
-
         # change stdout to titles.txt
+        with open("titles.csv", 'w') as titles:
+            self.movies.map(lambda x: f"{x.id},{x.title}")
         # loop through movieids and print id | title \n
 
         # change stdout to summaries.txt
