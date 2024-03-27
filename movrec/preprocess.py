@@ -14,7 +14,7 @@ class Movie:
 
 class Preprocessor:
     
-    def __init__(self, moviesData):
+    def __init__(self, moviesData=""):
         # initialize moviesData here
         self.moviesData = moviesData
         self.movies = {}
@@ -32,25 +32,41 @@ class Preprocessor:
         pass
     
     def printAll(self):
-        # change stdout to titles.txt
-        with open("titles.csv", 'w') as titles:
-            self.movies.map(lambda x: f"{x.id},{x.title}")
+        for i in range(10):
+            self.movies[i] = Movie()
+            self.movies[i].id = i
+            self.movies[i].title = f"test{i}"
+
         # loop through movieids and print id | title \n
+        with open("titles.csv", 'w') as titles:
+            titles.write("id,title\n")
+            for val in self.movies.values():
+                titles.write(f"{val.id},{val.title}\n")
+
 
         # change stdout to summaries.txt
         # loop through summaries dict and print id | word1 word2 ... \n
-
+        with open("summaries.csv", 'w') as summaries:
+            summaries.write("id,summary\n")
+            for val in self.movies.values():
+                summaries.write(f"{val.id},{val.summary}\n")
+    
         # change stdout to fullplots.txt
         # loop through fullplots dict and print id | word1 word2 ... \n
+        with open("fullplot.csv", 'w') as fullplot:
+            fullplot.write("id,fullplot\n")
+            for val in self.movies.values():
+                fullplot.write(f"{val.id},{val.fullplot}\n")
 
         # change stdout to other.txt
         # loop through and print id | year | dir1 dir2 ... | cast1 cast2 ... \n
-        pass
+         with open("other.csv", 'w') as other:
+            other.write("id|genre|years|directors|cast\n")
+            for val in self.movies.values():
 
 
 def main():
     p = Preprocessor()
-    p.clean()
     p.printAll()
 
 if __name__ == "__main__":
