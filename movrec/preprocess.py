@@ -4,7 +4,7 @@ class Movie:
     def __init__(self):
         self.id = -1
         self.title = ""
-        self.genre = ""
+        self.genre = []
         self.summary = ""
         self.fullplot = ""
         self.cast = []
@@ -60,10 +60,42 @@ class Preprocessor:
 
         # change stdout to other.txt
         # loop through and print id | year | dir1 dir2 ... | cast1 cast2 ... \n
-         with open("other.csv", 'w') as other:
-            other.write("id|genre|years|directors|cast\n")
+        with open("other.csv", 'w') as other:
+            other.write("id|genres|years|directors|cast\n")
             for val in self.movies.values():
+                other.write(f"{val.id}|")
+                
+                # Write genres
+                for i, genre in enumerate(val.genres):
+                    if i == 0:
+                        other.write(f"{genre}")
+                    else:
+                        other.write(f",{genre}")
+                other.write("|")
 
+                # Write years
+                for i, year in enumerate(val.years):
+                    if i == 0:
+                        other.write(f"{year}")
+                    else:
+                        other.write(f",{year}")
+                other.write("|")
+
+                # Write directors
+                for i, director in enumerate(val.directors):
+                    if i == 0:
+                        other.write(f"{director}")
+                    else:
+                        other.write(f",{director}")
+                other.write("|")
+
+                # Write cast
+                for i, cast in enumerate(val.cast):
+                    if i == 0:
+                        other.write(f"{cast}")
+                    else:
+                        other.write(f",{cast}")
+                other.write("\n")
 
 def main():
     p = Preprocessor()
