@@ -1,3 +1,9 @@
+import csv
+import sys
+import re
+import nltk
+import pandas as pd
+
 # Here we simply process all the text data
 # add necessary imports, including dataset
 class Movie: 
@@ -12,14 +18,49 @@ class Movie:
         self.years = []
 
 
+genre_frequency = {}
+
+def clean_genre(genre_string):
+    split_genre = re.split(", |,|/| /|-", genre_string)
+    for genre in split_genre:
+        genre_frequency[genre] = genre_frequency.get(genre, 0) + 1
+    return [s.strip() for s in filter(('').__ne__, split_genre)]
+
+
+def clean_directors(directors_string):
+    pass
+
+
+def clean_cast(cast_string):
+    split_cast = re.split("\n|,\n|, |\r| & |Cast: | and ", cast_string)
+    if len(split_cast) == 1 and split_cast[0] == '':
+        return split_cast
+    return [s.strip() for s in filter(('').__ne__, split_cast)]
+
+def clean_summary(summary):
+    pass
+
+def clean_full_plot(plot):
+    pass
+
+
 class Preprocessor:
     
-    def __init__(self, moviesData=""):
+    def __init__(self, movies_data):
         # initialize moviesData here
-        self.moviesData = moviesData
-        self.movies = {}
+        self.movies_data = pd.read_csv(movies_data)
+        self.movies_data.astype('object')
 
     def clean(self):
+        self.movies_data['Genre'] = self.movies_data['Genre'].fillna('unknown')
+        self.movies_data['Genre'] = self.movies_data['Genre'].apply(lambda genre: clean_genre(genre))
+
+        for key, value in sorted(genre_frequency.items(), key=lambda x:-x[1]):
+            print(f"{key}: {value}")
+
+        self.movies_data['Cast'] = self.movies_data['Cast'].fillna('')
+        self.movies_data['Cast'] = self.movies_data['Cast'].apply(lambda cast: clean_cast(cast))
+
         # i = 0 start movie id
         # while loop till reading data done
             # add to movieIds
@@ -32,10 +73,10 @@ class Preprocessor:
         pass
     
     def printAll(self):
-        for i in range(10):
-            self.movies[i] = Movie()
-            self.movies[i].id = i
-            self.movies[i].title = f"test{i}"
+        # for i in range(10):
+        #     self.movies[i] = Movie()
+        #     self.movies[i].id = i
+        #     self.movies[i].title = f"test{i}"
 
         # loop through movieids and print id | title \n
         with open("titles.csv", 'w') as titles:
@@ -98,8 +139,9 @@ class Preprocessor:
                 other.write("\n")
 
 def main():
-    p = Preprocessor()
-    p.printAll()
+    movies_csv = sys.argv[1]
+    p = Preprocessor(movies_csv)
+    p.clean()
 
 if __name__ == "__main__":
     main()
