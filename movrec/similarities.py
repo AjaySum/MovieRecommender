@@ -16,8 +16,7 @@ nltk.download('punkt')
 class SimilarityCalculator():
     fullPlotsDoc = ""
     summariesDoc = ""
-    # TODO: fix to get actual glove word embedding
-    # wordVectors = Vectors(name='glove.6B.300d.txt', cache='./vector_cache')
+    wordVectors = Vectors(name='glove.6B/glove.6B.300d.txt')
 
     # key is tuple (id1, id2) and value is similarity score
     summariesSimilarity = {}
@@ -54,27 +53,30 @@ class SimilarityCalculator():
         else:
             return None
     
-    def pad_vector(vector, target_length):
-        if len(vector) < target_length:
-            padding_length = target_length - len(vector)
-            padded_vector = np.pad(vector, ((0, padding_length)), mode='constant')
-            return padded_vector
-        else:
-            return vector
+    # def pad_vector(self, vector, target_length):
+    #     if len(vector) < target_length:
+    #         padding_length = target_length - len(vector)
+    #         padded_vector = np.pad(vector, ((0, padding_length), (0, 0)), mode='constant')
+    #         return padded_vector
+    #     else:
+    #         return vector
     
     def enc_summaries(self):
-        for key1, val1 in self.summaryVecs:
-            for key2, val2 in self.summaryVecs:
+        for key1, val1 in self.summaryVecs.items():
+            for key2, val2 in self.summaryVecs.items():
                 if key1 != key2:
+
                     if val1 is not None and val2 is not None:
-                        max_length = max(len(val1), len(val2))
-                        # Pad vectors to match the maximum length
-                        val1 = self.pad_vector(val1, max_length)
-                        val2 = self.pad_vector(val2, max_length)
+                    #     min_length = min(len(val1), len(val2))
+                    #     val1 = val1[:min_length]
+                    #     val2 = val2[:min_length]
+                    #     # Pad vectors to match the maximum length
+                    #     # val1 = self.pad_vector(val1, max_length)
+                    #     # val2 = self.pad_vector(val2, max_length)
 
                         val1 = val1.reshape(1, -1)
                         val2 = val2.reshape(1, -1)
-                        similarity = cosine_similarity(val1, val2)[0][0]
+                        similarity = max(float(cosine_similarity(val1, val2)[0][0]), 0)
                         print(f"{key1} {key2}|{similarity}") 
                     else:
                         print(f"{key1} {key2}|0") 
@@ -93,14 +95,17 @@ class SimilarityCalculator():
 
         # Print the cosine similarity matrix
         # print(cosine_sim)
+        print("tfIDF similarity for Full Plot")
         for index, value in np.ndenumerate(cosine_sim):
             if index[0] != index[1]:
                 index = str(index)
                 index = index.replace("(", "")
                 index = index.replace(")", "")
                 index = index.replace(",", "")
-
+                value = max(float(value), 0)
+                
                 print(f"{index}|{value}")
+        print("-------")
 
 
 
@@ -108,7 +113,7 @@ def main():
     s = SimilarityCalculator("testFullPlots.csv", "testSummaries.csv")
     s.readIn()
     s.enc_summaries()
-    # s.tfIdf_fullPlots()
+    s.tfIdf_fullPlots()
 
 if __name__ == "__main__":
     main()
