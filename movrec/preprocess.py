@@ -18,13 +18,26 @@ class Movie:
         self.years = []
 
 
+
+
 genre_frequency = {}
 
 def clean_genre(genre_string):
+    global genre_frequency
     split_genre = re.split(", |,|/| /|-", genre_string)
+    updated_split_genre = []
     for genre in split_genre:
-        genre_frequency[genre] = genre_frequency.get(genre, 0) + 1
-    return [s.strip() for s in filter(('').__ne__, split_genre)]
+        if ' ' in genre:
+            words = genre.split(' ')
+            for word in words:
+                updated_split_genre.append(word)
+                genre_frequency[word] = genre_frequency.get(word, 0) + 1
+        else:
+            updated_split_genre.append(genre)
+            genre_frequency[genre] = genre_frequency.get(genre, 0) + 1
+            
+    return [s.strip() for s in filter(('').__ne__, updated_split_genre)]
+
 
 
 def clean_directors(directors_string):
