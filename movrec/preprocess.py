@@ -3,22 +3,6 @@ import re
 import os
 import pandas as pd
 
-# Here we simply process all the text data
-# add necessary imports, including dataset
-class Movie: 
-    def __init__(self):
-        self.id = -1
-        self.title = ""
-        self.genre = []
-        self.summary = ""
-        self.fullplot = ""
-        self.cast = []
-        self.directors = []
-        self.years = []
-
-
-
-
 genre_frequency = {}
 
 def clean_genre(genre_string):
@@ -46,6 +30,7 @@ def clean_directors(directors_string):
         return split_directors
     return [s.strip() for s in filter(('').__ne__, split_directors)]
 
+
 def clean_cast(cast_string):
     if cast_string == "Unknown":
         return ["unknown"]
@@ -61,6 +46,7 @@ class Preprocessor:
         self.movies_data = pd.read_csv(movies_data)
         self.movies_data.astype('object')
 
+
     def clean(self):
         self.movies_data['Genre'] = self.movies_data['Genre'].fillna('unknown')
         self.movies_data['Genre'] = self.movies_data['Genre'].apply(lambda genre: clean_genre(genre))
@@ -71,7 +57,7 @@ class Preprocessor:
         self.movies_data['Director'] = self.movies_data['Director'].fillna('unknown')
         self.movies_data['Director'] = self.movies_data['Director'].apply(lambda director: clean_directors(director))
 
-    
+
     def printAll(self):
         # loop through movieids and print id | title \n
         current_directory = os.getcwd()
@@ -91,34 +77,27 @@ class Preprocessor:
                 other_string = str(index) + "|"
 
                 for index, genre in enumerate(row['Genre']):
-                    if index == 0:
-                        other_string += genre
-                    else:
-                        other_string += "," + genre
+                    other_string += genre if index == 0 else "," + genre
 
                 other_string += "|" + str(row['Release Year']) + "|"
 
                 for index, director in enumerate(row['Director']):
-                    if index == 0:
-                        other_string += director
-                    else:
-                        other_string += ',' + director
+                    other_string += director if index == 0 else "," + director
                 
                 other_string += "|"
 
                 for index, cast in enumerate(row['Cast']):
-                    if index == 0:
-                        other_string += cast
-                    else:
-                        other_string += ',' + cast
+                    other_string += cast if index == 0 else "," + cast
 
                 other.write(other_string+"\n")
+
 
 def main():
     movies_csv = sys.argv[1]
     p = Preprocessor(movies_csv)
     p.clean()
     p.printAll()
+
 
 if __name__ == "__main__":
     main()
