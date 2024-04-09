@@ -1,7 +1,6 @@
-import csv
 import sys
 import re
-import nltk
+import os
 import pandas as pd
 
 # Here we simply process all the text data
@@ -55,13 +54,6 @@ def clean_cast(cast_string):
         return split_cast
     return [s.strip() for s in filter(('').__ne__, split_cast)]
 
-def clean_summary(summary):
-    pass
-
-def clean_full_plot(plot):
-    pass
-
-
 class Preprocessor:
     
     def __init__(self, movies_data):
@@ -73,93 +65,35 @@ class Preprocessor:
         self.movies_data['Genre'] = self.movies_data['Genre'].fillna('unknown')
         self.movies_data['Genre'] = self.movies_data['Genre'].apply(lambda genre: clean_genre(genre))
 
-        self.movies_data['Cast'] = self.movies_data['Cast'].fillna('')
+        self.movies_data['Cast'] = self.movies_data['Cast'].fillna('unknown')
         self.movies_data['Cast'] = self.movies_data['Cast'].apply(lambda cast: clean_cast(cast))
 
-        self.movies_data['Director'] = self.movies_data['Director'].fillna('')
+        self.movies_data['Director'] = self.movies_data['Director'].fillna('unknown')
         self.movies_data['Director'] = self.movies_data['Director'].apply(lambda director: clean_directors(director))
 
-        # i = 0 start movie id
-        # while loop till reading data done
-            # add to movieIds
-            # add title as string
-            # add year after converting to int
-            # clean genre, cast and dirs manually and add
-            # clean summary, fullplot using library
-            # manually make sure there is no '|' character (use as separator later)
-            # increment i
-        pass
     
     def printAll(self):
-        # for i in range(10):
-        #     self.movies[i] = Movie()
-        #     self.movies[i].id = i
-        #     self.movies[i].title = f"test{i}"
-
         # loop through movieids and print id | title \n
-        with open("titles.csv", 'w') as titles:
-            titles.write("id,title\n")
-            for val in self.movies.values():
-                titles.write(f"{val.id},{val.title}\n")
-
-
-        # change stdout to summaries.txt
-        # loop through summaries dict and print id | word1 word2 ... \n
-        with open("summaries.csv", 'w') as summaries:
-            summaries.write("id,summary\n")
-            for val in self.movies.values():
-                summaries.write(f"{val.id},{val.summary}\n")
-    
-        # change stdout to fullplots.txt
-        # loop through fullplots dict and print id | word1 word2 ... \n
-        with open("fullplot.csv", 'w') as fullplot:
-            fullplot.write("id,fullplot\n")
-            for val in self.movies.values():
-                fullplot.write(f"{val.id},{val.fullplot}\n")
-
-        # change stdout to other.txt
-        # loop through and print id | year | dir1 dir2 ... | cast1 cast2 ... \n
-        with open("other.csv", 'w') as other:
-            other.write("id|genres|years|directors|cast\n")
-            for val in self.movies.values():
-                other.write(f"{val.id}|")
-                
-                # Write genres
-                for i, genre in enumerate(val.genres):
-                    if i == 0:
-                        other.write(f"{genre}")
-                    else:
-                        other.write(f",{genre}")
-                other.write("|")
-
-                # Write years
-                for i, year in enumerate(val.years):
-                    if i == 0:
-                        other.write(f"{year}")
-                    else:
-                        other.write(f",{year}")
-                other.write("|")
-
-                # Write directors
-                for i, director in enumerate(val.directors):
-                    if i == 0:
-                        other.write(f"{director}")
-                    else:
-                        other.write(f",{director}")
-                other.write("|")
-
-                # Write cast
-                for i, cast in enumerate(val.cast):
-                    if i == 0:
-                        other.write(f"{cast}")
-                    else:
-                        other.write(f",{cast}")
-                other.write("\n")
+        current_directory = os.getcwd()
+        final_directory = os.path.join(current_directory, r'preprocess_output')
+        if not os.path.exists(final_directory):
+            os.makedirs(final_directory)
+        with open("preprocess_output/titles.csv", 'w') as titles, open("preprocess_output/summaries.csv", 'w') as summaries, open("preprocess_output/fullplot.csv", 'w') as fullplot, open("preprocess_output/other.csv", 'w') as other:
+            titles.write("id|title\n")
+            summaries.write("id|summary\n")
+            fullplot.write("id|fullplot\n")
+            other.write("id|genre|release year|director|cast\n")
+            for index, row in self.movies_data.iterrows():
+                titles.write(f"{index}|{row['Title']}\n")
+                summaries.write(f"{index}|{row['PlotSummary']}\n")
+                fullplot.write(f"{index}|{row['Plot']}\n")
+                other.write(f"{index}|{row['Genre']}|{row['Release Year']}|{row['Director']}|{row['Cast']}\n")
 
 def main():
     movies_csv = sys.argv[1]
     p = Preprocessor(movies_csv)
     p.clean()
+    p.printAll()
 
 if __name__ == "__main__":
     main()
