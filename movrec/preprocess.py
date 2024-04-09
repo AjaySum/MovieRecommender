@@ -87,7 +87,32 @@ class Preprocessor:
                 titles.write(f"{index}|{row['Title']}\n")
                 summaries.write(f"{index}|{row['PlotSummary']}\n")
                 fullplot.write(f"{index}|{row['Plot']}\n")
-                other.write(f"{index}|{row['Genre']}|{row['Release Year']}|{row['Director']}|{row['Cast']}\n")
+
+                other_string = str(index) + "|"
+
+                for index, genre in enumerate(row['Genre']):
+                    if index == 0:
+                        other_string += genre
+                    else:
+                        other_string += "," + genre
+
+                other_string += "|" + str(row['Release Year']) + "|"
+
+                for index, director in enumerate(row['Director']):
+                    if index == 0:
+                        other_string += director
+                    else:
+                        other_string += ',' + director
+                
+                other_string += "|"
+
+                for index, cast in enumerate(row['Cast']):
+                    if index == 0:
+                        other_string += cast
+                    else:
+                        other_string += ',' + cast
+
+                other.write(other_string+"\n")
 
 def main():
     movies_csv = sys.argv[1]
