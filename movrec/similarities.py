@@ -4,11 +4,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import numpy as np
 import torch
-# import gensim
-# from gensim.models import KeyedVectors
+import sys
 from torchtext.vocab import Vectors
 from sklearn.metrics.pairwise import cosine_similarity
 import nltk
+import os
 nltk.download('punkt')
 
 
@@ -16,7 +16,8 @@ nltk.download('punkt')
 class SimilarityCalculator():
     fullPlotsDoc = ""
     summariesDoc = ""
-    wordVectors = Vectors(name='glove.6B/glove.6B.300d.txt')
+    dir = os.path.join(os.path.dirname(os.getcwd()), "glove.6B")
+    wordVectors = Vectors(name=os.path.join(dir, 'glove.6B.300d.txt'))
 
     # key is tuple (id1, id2) and value is similarity score
     summariesSimilarity = {}
@@ -62,6 +63,8 @@ class SimilarityCalculator():
     #         return vector
     
     def enc_summaries(self):
+        out_file = f"summaryEmbeddingScores.txt"
+        sys.stdout = open(out_file, 'w')
         for key1, val1 in self.summaryVecs.items():
             for key2, val2 in self.summaryVecs.items():
                 if key1 != key2:
@@ -83,6 +86,8 @@ class SimilarityCalculator():
 
         
     def tfIdf_fullPlots(self):
+        out_file = f"fullPlotTfIdfScores.txt"
+        sys.stdout = open(out_file, 'w')
         # for item in self.summaries:
         #     print(item)
         tfidf_vectorizer = TfidfVectorizer()
@@ -94,8 +99,6 @@ class SimilarityCalculator():
         cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 
         # Print the cosine similarity matrix
-        # print(cosine_sim)
-        print("tfIDF similarity for Full Plot")
         for index, value in np.ndenumerate(cosine_sim):
             if index[0] != index[1]:
                 index = str(index)
@@ -105,7 +108,6 @@ class SimilarityCalculator():
                 value = max(float(value), 0)
                 
                 print(f"{index}|{value}")
-        print("-------")
 
 
 
