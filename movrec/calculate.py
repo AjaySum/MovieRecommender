@@ -28,6 +28,7 @@ class Calculate():
     # key: (id1, id2)
     fullPlotScores = {}
     summariesScores = {}
+    genreScores = {}
     firstHalfScores = {}
     secondHalfScores = {}
     finalScores = {}
@@ -44,12 +45,12 @@ class Calculate():
         pass
 
     def secondHalf(self):
-        # THEY HAD US IN THE FIRST HALF NGL
 
         # set weights
-        d_w = 0 # director weight
-        c_w = 0 # cast weight
-        y_w = 0 # year weight
+        d_w = 0.3 # director weight
+        c_w = 0.2 # cast weight
+        y_w = 0.1 # year weight
+        g_w = 0.4 # genre weight
 
         # loop through all relevIds, self.queryId
             # calculate score and save to secondHalfScores
@@ -68,9 +69,9 @@ class Calculate():
     
     def finalCalcAndPrint():
         # set weights
-        w_1 = 0
-        w_2 = 0
-        w_3 = 0 # used for query similarity keywords
+        w_1 = 0.6
+        w_2 = 0.3
+        w_3 = 0.1 # used for query similarity keywords
         # do jaccard or tfidf to get query keywords similarity to summary
         # loop through all relevIds, self.queryId
             # calculate final score save to finalScores
@@ -82,6 +83,7 @@ class Calculate():
 
     def genreFilter():
         # filter based on genres. keep all unknowns and add all filtered to relevIds
+        # save genre score jaccard similarity
         pass
 
     def readIn(self):

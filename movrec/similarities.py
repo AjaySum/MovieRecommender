@@ -54,13 +54,6 @@ class SimilarityCalculator():
         else:
             return None
     
-    # def pad_vector(self, vector, target_length):
-    #     if len(vector) < target_length:
-    #         padding_length = target_length - len(vector)
-    #         padded_vector = np.pad(vector, ((0, padding_length), (0, 0)), mode='constant')
-    #         return padded_vector
-    #     else:
-    #         return vector
     
     def enc_summaries(self):
         out_file = f"summaryEmbeddingScores.txt"
@@ -70,12 +63,6 @@ class SimilarityCalculator():
                 if key1 != key2:
 
                     if val1 is not None and val2 is not None:
-                    #     min_length = min(len(val1), len(val2))
-                    #     val1 = val1[:min_length]
-                    #     val2 = val2[:min_length]
-                    #     # Pad vectors to match the maximum length
-                    #     # val1 = self.pad_vector(val1, max_length)
-                    #     # val2 = self.pad_vector(val2, max_length)
 
                         val1 = val1.reshape(1, -1)
                         val2 = val2.reshape(1, -1)
