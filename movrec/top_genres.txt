@@ -1,0 +1,1069 @@
+drama: 7962
+unknown: 6083
+comedy: 5909
+action: 2065
+romance: 1676
+horror: 1439
+thriller: 1362
+crime: 936
+western: 933
+adventure: 752
+musical: 737
+science fiction: 502
+family: 493
+romantic comedy: 489
+crime drama: 476
+mystery: 434
+fantasy: 432
+war: 391
+sci: 390
+fi: 362
+film noir: 347
+animation: 321
+biography: 292
+animated: 256
+musical comedy: 154
+suspense: 134
+historical: 130
+social: 123
+anime: 119
+romantic drama: 108
+comedy drama: 103
+ drama: 102
+ romance: 99
+spy: 91
+animated short: 91
+world war ii: 85
+documentary: 81
+sports: 80
+ comedy: 80
+action thriller: 79
+ action: 77
+martial arts: 75
+serial: 74
+superhero: 72
+biopic: 69
+family drama: 68
+war drama: 65
+crime thriller: 61
+black comedy: 61
+historical drama: 60
+action comedy: 56
+horror comedy: 54
+ crime: 54
+comedy short: 50
+ thriller: 49
+crime comedy: 48
+ adventure: 47
+tokusatsu: 42
+action drama: 41
+romance : 41
+social drama: 41
+melodrama: 40
+ fantasy: 40
+short: 36
+biographical: 35
+drama : 33
+mockumentary: 32
+dramedy: 31
+thriller : 31
+romantic: 30
+romance drama: 29
+psychological thriller: 28
+ : 28
+animated film: 27
+ mystery: 27
+action : 27
+masala: 26
+satire: 25
+epic: 24
+adult: 24
+ martial arts: 24
+parody: 22
+mythology: 22
+comedy : 22
+fiction: 21
+political thriller: 21
+teen: 21
+political: 21
+sports drama: 20
+bio: 20
+pic: 20
+literary drama: 20
+slice of life: 20
+science fantasy: 20
+short subject: 19
+science: 18
+supernatural: 18
+romantic thriller: 18
+docudrama: 17
+spy film: 17
+dance: 17
+family film: 17
+ war: 17
+youth: 17
+folklore: 17
+costume drama: 16
+disaster: 16
+history: 16
+horror thriller: 16
+superheroes: 16
+action adventure: 15
+western comedy: 15
+rom com: 15
+slasher: 15
+wuxia: 15
+kaiju: 15
+music: 14
+animated feature: 14
+dark comedy: 14
+supernatural horror: 14
+children's: 14
+sex comedy: 14
+social family drama: 14
+propaganda: 13
+musical drama: 13
+disaster film: 13
+fi comedy: 13
+comedy horror: 13
+anthology: 13
+ costume: 13
+devotional: 13
+swashbuckler: 12
+slapstick: 12
+political drama: 12
+ history: 12
+ horror: 12
+ suspense: 12
+period drama: 11
+screwball comedy: 11
+noir: 11
+: 11
+children: 11
+action masala: 11
+exploitation: 10
+spy thriller: 10
+war comedy: 10
+neo: 10
+suspense thriller: 10
+kung fu: 10
+detective: 9
+comedy thriller: 9
+erotic: 9
+children's film: 9
+ family: 9
+national film board animated short: 9
+drama film: 9
+ animation: 9
+thriller drama: 9
+magical girl: 9
+sexploitation: 8
+period: 8
+socio: 8
+ kung fu: 8
+love: 8
+short film: 7
+fantasy drama: 7
+spy drama: 7
+historical epic: 7
+spy comedy: 7
+sports comedy: 7
+avant: 7
+garde: 7
+live: 7
+world war i: 7
+costume: 7
+religious: 7
+jidaigeki: 7
+dark fantasy: 7
+ero: 7
+comedy romance: 6
+sport: 6
+gangster: 6
+fantasy thriller: 6
+psychological horror: 6
+fantasy romance: 6
+ sci: 6
+african adventure: 6
+coming: 6
+of: 6
+comedy film: 6
+horror : 6
+musical : 6
+action thriller : 6
+samurai film: 6
+fantasy anime: 6
+monster: 6
+mecha: 6
+biographical drama: 5
+comedy western: 5
+biblical drama: 5
+operetta: 5
+comedy mystery: 5
+romance musical: 5
+prison drama: 5
+science fiction comedy: 5
+biker film: 5
+fi horror: 5
+shakespearean: 5
+war film: 5
+supernatural thriller: 5
+age drama: 5
+ biography: 5
+adult comedy: 5
+social : 5
+idol: 5
+adventure serial: 4
+short comedy: 4
+dramatic comedy: 4
+biblical: 4
+adventure drama: 4
+experimental: 4
+espionage: 4
+3: 4
+d: 4
+family comedy: 4
+true crime: 4
+fi drama: 4
+erotic thriller: 4
+rom: 4
+com: 4
+teen comedy: 4
+buddy cop: 4
+road: 4
+christian: 4
+post: 4
+ western: 4
+action romance: 4
+romance action: 4
+short drama: 4
+pow: 4
+world war ii comedy: 4
+slasher film: 4
+produced with the national film board: 4
+national film board documentary: 4
+sword: 4
+satirical comedy: 4
+heist: 4
+romantic comedy : 4
+ileana d'cruz: 4
+charmme: 4
+pink: 4
+yakuza: 4
+science fiction anime: 4
+western drama: 3
+drama romance: 3
+historical comedy: 3
+musical fantasy: 3
+animated comedy: 3
+romantic fantasy: 3
+romantic musical: 3
+educational: 3
+historic: 3
+biker: 3
+adult film: 3
+fantasy adventure: 3
+lgbt: 3
+coming of age: 3
+animation adventure: 3
+animation comedy: 3
+superhero action adventure: 3
+apocalyptic: 3
+ musical: 3
+nfb animated short: 3
+tv miniseries: 3
+fi fantasy: 3
+horror drama: 3
+ martial: 3
+arts: 3
+costume action: 3
+social family: 3
+thriller romance: 3
+social romance: 3
+patriotic: 3
+political satire: 3
+patriotism: 3
+road movie: 3
+raja: 3
+ravi teja: 3
+srikanth: 3
+historical film: 3
+action & romance: 3
+chanbara: 3
+roman porno: 3
+fi for children: 3
+anime for children: 3
+school: 3
+anime fantasy: 3
+military: 3
+musical biography: 2
+murder mystery: 2
+musical romance: 2
+western serial: 2
+charlie chan: 2
+spy serial: 2
+propaganda short: 2
+action western: 2
+p.o.w.: 2
+war romance: 2
+animated musical: 2
+stop: 2
+blaxploitation: 2
+action film: 2
+cult: 2
+road thriller: 2
+comedy action: 2
+family adventure: 2
+historical biopic: 2
+science fiction thriller: 2
+space opera: 2
+007: 2
+concert: 2
+nature documentary: 2
+christian drama: 2
+live action: 2
+legal drama: 2
+direct: 2
+to: 2
+dvd: 2
+romance thriller: 2
+science fiction action: 2
+supernatural comedy: 2
+imdb: 2
+ science: 2
+erotic drama: 2
+shakespearean drama: 2
+australian western: 2
+african drama: 2
+world war i drama: 2
+futuristic drama: 2
+portmanteau horror: 2
+slapstick comedy: 2
+gangster drama: 2
+thriller comedy: 2
+drama co: 2
+kung: 2
+animated short co: 2
+police drama: 2
+zombie comedy: 2
+boxing drama: 2
+science fiction film: 2
+zombie horror: 2
+biodrama: 2
+anthology film: 2
+tragedy: 2
+triad: 2
+ ancient: 2
+ sports: 2
+ science fiction: 2
+gangster film: 2
+gun fu: 2
+martial arts film: 2
+ erotic: 2
+teen romance: 2
+family romance: 2
+biopic drama: 2
+costume action adventure: 2
+biopic devotional: 2
+romance comedy: 2
+crime thriller romance: 2
+crime romance: 2
+romance comedy drama: 2
+social crime: 2
+children drama: 2
+family social: 2
+drama action: 2
+romantic family drama: 2
+family : 2
+found footage: 2
+historical fiction: 2
+social satire: 2
+yash raj films: 2
+romantic action: 2
+revenge: 2
+medical thriller: 2
+politics: 2
+love story: 2
+mob: 2
+period piece: 2
+social thriller: 2
+remake: 2
+super hit movie: 2
+mythological: 2
+allari naresh: 2
+trisha krishnan: 2
+rajendra prasad: 2
+prakash raj: 2
+pawan kalyan: 2
+sumanth: 2
+jr. ntr: 2
+ali: 2
+period film: 2
+action & love: 2
+samurai: 2
+drama[not in citation given]: 2
+chambara: 2
+kaiju eiga: 2
+action for children: 2
+fighting: 2
+j: 2
+detective fiction: 2
+computer animation: 2
+sports (road bicycle racing): 2
+steampunk: 2
+sports (shogi: 2
+chess): 2
+sports (aquatics: 2
+swimming): 2
+fairy tale: 2
+short action: 1
+crime western: 1
+short fantasy: 1
+silent sports: 1
+documentary drama: 1
+comedy–drama: 1
+sexual hygiene: 1
+exploitation film: 1
+ww1 propaganda: 1
+animated series: 1
+american football: 1
+semi: 1
+staged documentary: 1
+race film: 1
+comedy adventure: 1
+romantic crime: 1
+adventure film: 1
+adventure horror: 1
+musical western: 1
+comedy 2: 1
+reeler: 1
+military romance: 1
+western romance: 1
+mystery comedy: 1
+epic drama: 1
+war spy: 1
+comedy spy: 1
+science fiction horror: 1
+drama war: 1
+western musical: 1
+race: 1
+cartoon: 1
+aviation: 1
+crime musical: 1
+musical biopic: 1
+short animation: 1
+comedy; 6 separate stories: 1
+war documentary: 1
+propaganda short animated short: 1
+musical bio: 1
+drama anthology: 1
+musical–comedy: 1
+war drama propaganda: 1
+war propaganda: 1
+crime mystery: 1
+war biography: 1
+nature: 1
+comedy–horror: 1
+cold war: 1
+sports biopic: 1
+adventures: 1
+trilogy: 1
+warner bros. drama: 1
+paramount. biblical epic: 1
+united artists. biography: 1
+warner bros. biography: 1
+cartoon short: 1
+war short: 1
+epic western: 1
+erotic comedy: 1
+travel: 1
+horror musical: 1
+spy anthology: 1
+pow comedy: 1
+compilation: 1
+motion animation: 1
+experimental short: 1
+outlaw biker film: 1
+biker drama: 1
+spy spoof: 1
+erotic musical: 1
+television miniseries: 1
+superhero film: 1
+16 mm film: 1
+fi action: 1
+cult film: 1
+horror and priquitianism: 1
+family. drama: 1
+clay animation: 1
+imax: 1
+student film: 1
+biogtaphy: 1
+superhero comedy: 1
+animation comedy family: 1
+independent: 1
+reality: 1
+epic fantasy: 1
+silent: 1
+horror–thriller: 1
+themed comedy: 1
+drama comedy: 1
+action horror: 1
+spoof: 1
+fi western: 1
+3d: 1
+independent movie: 1
+survival: 1
+buddy comedy: 1
+boxing: 1
+slahser: 1
+animation fantasy: 1
+animated adventure: 1
+science fiction psychological thriller : 1
+drama horror thriller film: 1
+science fiction mystery: 1
+biographical drama : 1
+adventure science fiction: 1
+action adventure science fiction: 1
+adventure thriller: 1
+biographical comedy: 1
+western thriller: 1
+biographical political thriller: 1
+animation martial arts action: 1
+fantasy action: 1
+science fiction psychological thriller: 1
+romance dramedy: 1
+science fiction adventure: 1
+science fiction drama supernatural: 1
+fantasy action adventure: 1
+mockumentary comedy: 1
+social science fiction action: 1
+science fiction action adventure: 1
+action adventure thriller spy: 1
+crime dramedy: 1
+auli'i cravalho dwayne johnson: 1
+reese witherspoon scarlett johansson: 1
+zombie: 1
+ usa: 1
+can : 1
+ usa : 1
+short documentary: 1
+mystery drama: 1
+surf: 1
+historical romance: 1
+apocalyptic science fiction: 1
+biography crime: 1
+animation musical: 1
+comedy short film: 1
+mystery (30min): 1
+supernatural action: 1
+pseudo: 1
+animation drama: 1
+biography drama: 1
+apocalyptic thriller: 1
+biographical war film: 1
+documentary film: 1
+liberation war: 1
+thriller action: 1
+chanchal chowdhury masuma rahman nabila partha barua: 1
+romantic adventure: 1
+world war ii documentary: 1
+world war ii drama documentary: 1
+short mystery: 1
+action based on radio serial: 1
+comedy based on comic strip: 1
+south african western: 1
+drama documentary: 1
+malyana emergency adventure: 1
+literary adaptation: 1
+korean war: 1
+world war ii action: 1
+teen drama: 1
+world war ii drama: 1
+colonial adventure: 1
+spy comedy thriller: 1
+james bond: 1
+prehistoric adventure: 1
+psy thriller: 1
+british: 1
+german co: 1
+production: 1
+counterculture: 1
+detective drama: 1
+fi mystery: 1
+horror spoof: 1
+musical b: 1
+sci fi: 1
+punk: 1
+occult drama: 1
+animated drama: 1
+rock musical: 1
+historical horror: 1
+crime biopic: 1
+sexual drama: 1
+surreal comedy: 1
+comedic drama: 1
+animated fantasy: 1
+historical crime: 1
+dramatic biography: 1
+spy action: 1
+historical dram: 1
+tragic comedy: 1
+period comedy: 1
+age: 1
+comedy sci: 1
+adventure fantasy: 1
+urban thriller: 1
+august 25: 1
+drama based on the novel by stephen vizinczey: 1
+crime drama based on a true story: 1
+summer camp comedy: 1
+holocaust melodrama: 1
+drama based on the play by bernard slade: 1
+medical drama: 1
+cult drama: 1
+national film board docudrama: 1
+cbc: 1
+feature animation: 1
+produced by the national film board: 1
+gothic mystery: 1
+time romance melodrama: 1
+modern day passion play: 1
+time: 1
+travelling comedy: 1
+television drama: 1
+fi exploitation: 1
+fu film: 1
+wartime drama: 1
+historical costume drama: 1
+drama based on the novel by j.g. ballard: 1
+drama adapted from the play by michel: 1
+marc bouchard: 1
+drama based on the novel by russell banks;: 1
+drama based on the novel by rohinton mistry: 1
+religious drama: 1
+epic drama set 4: 1
+000 years ago in the canadian arctic: 1
+coming of age drama: 1
+dance film: 1
+ horror from the novel by bram stoker: 1
+short black comedy: 1
+historical biodrama on the early years of hitler: 1
+biodrama on alice robitaille: 1
+surreal drama: 1
+animated feature co: 1
+drama loosely based on oliver twist: 1
+aids drama: 1
+biodrama about montreal canadiens star: 1
+maurice richard: 1
+romance about alzheimer’s disease based on story by alice munro.: 1
+fiction made with the national film board: 1
+wwii drama: 1
+interactive cinema: 1
+national film board stop motion animated short: 1
+drama based on the novel by margaret laurence: 1
+crime melodrama: 1
+sexual: 1
+inuit drama: 1
+dance drama: 1
+immigrant family drama: 1
+drama adaptation of the mordecai richler novel: 1
+motion animation produced with the national film board and warner home video: 1
+drama adapted from wajdi mouawad's play of the same name: 1
+horror in 3d.: 1
+concert film: 1
+hockey drama: 1
+vampire: 1
+drama about child soldiers: 1
+animated feature in 3d: 1
+adventure science fantasy: 1
+adaptation of a play by michel marc bouchard: 1
+sf: 1
+animated short produced with the national film board: 1
+disaster romance: 1
+historical romance based on colm tóibín's novel of the same name.: 1
+biopic of pioneering american photographer eadweard muybridge: 1
+afghan war drama: 1
+drama based on into the forest by jean hegland: 1
+drama based on a novel and screenplay by emma donoghue: 1
+adapted from the play by alexandre goyette: 1
+conspiracy thriller: 1
+documentary short: 1
+animated feature produced with the national film board of canada: 1
+science fiction lgbt: 1
+related drama: 1
+themed drama: 1
+costume comedy: 1
+martial art drama: 1
+martial art: 1
+ kids: 1
+ancient: 1
+ homosexual: 1
+ music: 1
+ children: 1
+political comedy: 1
+huangmei opera: 1
+fu: 1
+kung fu triad: 1
+thai boxing drama: 1
+kung fu action drama: 1
+kung fu action: 1
+bruceploitation: 1
+ wuxia: 1
+comedy fantasy: 1
+ prison: 1
+ fantay: 1
+crime.: 1
+duology: 1
+ romantic comedy: 1
+fi romance: 1
+lee sin: 1
+je: 1
+yuen lai: 1
+kei: 1
+ crime thriller: 1
+martial arts comedy film: 1
+ erotica: 1
+ disaster: 1
+physiological thriller: 1
+teen romantic comedy: 1
+romance; drama: 1
+tapas paul: 1
+debashree roy: 1
+horror drama comedy: 1
+tragerdy: 1
+jeet: 1
+nusrat faria mazhar: 1
+shraddha das: 1
+dev: 1
+nusrat jahan: 1
+yash dasgupta: 1
+mimi chakraborty: 1
+devotional biopic: 1
+mythology legend: 1
+social romance musical: 1
+adventure action comedy: 1
+period costume: 1
+romantic social drama: 1
+biopic legend devotional: 1
+historical epic drama: 1
+family social drama: 1
+double: 1
+role action drama: 1
+muslim social: 1
+war family drama: 1
+social biopic: 1
+drama romance musical: 1
+romantic drama triangle: 1
+romantic drama social: 1
+social family romance: 1
+action crime thriller: 1
+reincarnation suspense thriller: 1
+ 1 girl & 3 suitors: 1
+romantic melodrama: 1
+swashbuckling musical romance: 1
+legend romance musical: 1
+romance suspense: 1
+historical romantic drama: 1
+comedy romance drama: 1
+family drama social: 1
+social children: 1
+romance action drama: 1
+costume fantasy: 1
+social comedy: 1
+tragedy drama romance: 1
+crime social drama: 1
+costume social drama: 1
+crime suspense romance: 1
+musical thriller drama: 1
+romance social: 1
+social action: 1
+comedy family: 1
+drama action adventure: 1
+romance thriller drama: 1
+suspense romance: 1
+fantasy costume: 1
+thriller action romance: 1
+reincarnation romance: 1
+action fantasy: 1
+biographical patriotic drama: 1
+social drama romance: 1
+romance social drama: 1
+drama social: 1
+family comedy romance: 1
+crime social romance: 1
+historical costume romance: 1
+social satire drama: 1
+romance drama war: 1
+social children drama: 1
+drama family: 1
+drama family romance war: 1
+social romantic drama: 1
+biopic historical drama: 1
+family drama romance: 1
+romantic triangle: 1
+romance crime drama: 1
+classic muslim social: 1
+romantic muslim social: 1
+children adventure: 1
+historical romantic: 1
+fiction drama: 1
+revolutionary patriotic: 1
+social crime drama: 1
+family melodrama: 1
+comedy family drama: 1
+romantic spy drama: 1
+romantic fantasy drama: 1
+social romantic melodrama: 1
+romance suspense thriller: 1
+reincarnation drama: 1
+action mystery thriller: 1
+family romance action: 1
+sentiment: 1
+triller: 1
+nadeem: 1
+shravan: 1
+historical : 1
+crime fiction: 1
+adult drama: 1
+business: 1
+history : 1
+fantasy : 1
+thriler: 1
+spy : 1
+adventure : 1
+politics : 1
+mystery : 1
+animation : 1
+epic film: 1
+yeh saali zindagi: 1
+teen film: 1
+comedy road movie: 1
+romance comedy crime: 1
+computer: 1
+computer animated: 1
+espionage thriller: 1
+erotica: 1
+silent hills studio: 1
+political crime thriller: 1
+panorama studios: 1
+sex: 1
+bbc films: 1
+movies by the mob & knkspl: 1
+crime ttriller: 1
+colour yellow productions & eros international: 1
+viacom 18 motion pictures: 1
+bholenath movies & cinekorn entertainment: 1
+biographic: 1
+dharma productions: 1
+red chillies entertainment & b.r films: 1
+k9 films: 1
+ documentary: 1
+period romance: 1
+ found footage: 1
+action; drama: 1
+mystery thriller: 1
+satire : 1
+satire drama: 1
+family (artistic): 1
+experimental film: 1
+art film: 1
+campus: 1
+art: 1
+stoner film: 1
+environmental film: 1
+human rights: 1
+investigative: 1
+black humour: 1
+psychological thriller film: 1
+[140]: 1
+[144]: 1
+comedey: 1
+psycho thriller: 1
+period thriller: 1
+thriller travelogue: 1
+comedy romantic thriller: 1
+biju menon: 1
+krishnashankar: 1
+samskruti shenoy: 1
+campus drama: 1
+campus thriller: 1
+yogesh dattatraya gosavi's directorial debut. [9]: 1
+vigilante: 1
+romcom: 1
+romance film: 1
+critically acclaimed: 1
+cultural: 1
+action romantic: 1
+familya: 1
+romanctic comedy: 1
+mystery adventure: 1
+perodic: 1
+gangster thriller : 1
+comedy drama : 1
+famil drama : 1
+ superhero : 1
+romantic thriller : 1
+masala film: 1
+action—masala: 1
+action (film genre): 1
+fantasy comedy: 1
+ period: 1
+fi romantic thriller: 1
+comedy masala: 1
+fiction comedy: 1
+fantasy horror: 1
+romanctic drama: 1
+horror masala: 1
+fantasy adventure comedy: 1
+famil drama: 1
+cowboy: 1
+chakravarthy musical hit: 1
+romantic musical film: 1
+biographical fim: 1
+fantasy and comedy: 1
+stylish: 1
+ram: 1
+raghava lawrence: 1
+prabhu deva: 1
+kamalini mukherjee: 1
+siddharth narayan: 1
+sada: 1
+jyothika: 1
+kalyan ram: 1
+arjun: 1
+jagapati babu: 1
+d. ramanaidu: 1
+kalyani: 1
+rajasekhar: 1
+brahmanandam: 1
+kondavalasa lakshmana rao: 1
+madhu sharma: 1
+shashank: 1
+bramhanandam: 1
+ravi babu: 1
+prabhas: 1
+sindhu tolani: 1
+mahesh babu: 1
+reema sen: 1
+meera chopra: 1
+mukesh rishi: 1
+priyadarshini ram: 1
+viswendar reddy: 1
+radhika joshi: 1
+kamalinee mukherjee: 1
+rajiv kanakala: 1
+saloni aswani: 1
+siva balaji: 1
+anushka shetty: 1
+mohanlal: 1
+mammootty: 1
+nedumudi venu: 1
+bharath gopi: 1
+ajay: 1
+kota srinivasa rao: 1
+sameera reddy: 1
+sonu sood: 1
+suhasini: 1
+sharwanand: 1
+shriya reddy: 1
+siddharth: 1
+genelia d'souza: 1
+jayasudha: 1
+sunil: 1
+arti agarwal: 1
+mohit ahlawat: 1
+priyanka kothari: 1
+chiranjeevi: 1
+khushboo: 1
+indira amperiani: 1
+bhaskara s. narayanan: 1
+nagarjuna: 1
+shriya saran: 1
+nayantara: 1
+poonam bajwa: 1
+sivaji: 1
+krishna bhagavaan: 1
+venu madhav: 1
+bharath: 1
+arya: 1
+pooja: 1
+padmapriya: 1
+bhoomika chawla: 1
+s. p. balu: 1
+charmy kaur: 1
+uday kiran: 1
+vimala raman: 1
+asin: 1
+sandhya: 1
+balakrishna nandamuri: 1
+sneha: 1
+tabu: 1
+buddy film: 1
+bhavana: 1
+mythology (fiction): 1
+action entertainer: 1
+devotional biography: 1
+adult romance: 1
+drama thriller: 1
+psychological action thriller: 1
+action & comedy: 1
+horror – thriller: 1
+inspired by true event: 1
+fi thriller: 1
+keiji: 1
+war drama[not in citation given]: 1
+comedy[not in citation given]: 1
+science fiction[not in citation given]: 1
+erotic film: 1
+jidai: 1
+geki: 1
+mocatsu: 1
+anime war drama: 1
+docufiction drama: 1
+anime martial arts: 1
+anime drama mystery fantasy: 1
+yakuza film: 1
+comedy drama anime: 1
+horror film: 1
+tokusatsu v: 1
+cinema: 1
+erotic horror: 1
+time travel: 1
+art house & international: 1
+ken'ichi maysuyama: 1
+koyuki: 1
+gore film: 1
+splatter: 1
+gangster black comedy: 1
+anime science fiction: 1
+costume martial arts: 1
+anime drama: 1
+splatter comedy: 1
+anime action adventure: 1
+dystopia: 1
+cyberpunk: 1
+vampire film: 1
+youth drama: 1
+historical anime: 1
+youth music drama: 1
+suspense action horror: 1
+teen fantasy drama: 1
+sports (children's poker: 1
+karuta): 1
+supeheroes: 1
+harem: 1
+sports (volleyball): 1
+ historical: 1
+devotional horror: 1
+dark slasher: 1
+sport drama: 1
+historical fantasy: 1
+historical adventure: 1
+children's science fiction: 1
+olga khokhlova: 1
+sergey krapiventsev: 1
+oleg sukachenko: 1
+sport film: 1
+produced by glukoza production: 1
+fantasy film: 1
+horror romantic comedy: 1
