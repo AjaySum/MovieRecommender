@@ -39,12 +39,17 @@ def clean_genre(genre_string):
     return [s.strip() for s in filter(('').__ne__, updated_split_genre)]
 
 
-
 def clean_directors(directors_string):
-    pass
-
+    if directors_string == "Unknown":
+        return ["unknown"]
+    split_directors = re.split("\n|,\n|, |\r| & |Director: | and ", directors_string)
+    if len(split_directors) == 1 and split_directors[0] == '':
+        return split_directors
+    return [s.strip() for s in filter(('').__ne__, split_directors)]
 
 def clean_cast(cast_string):
+    if cast_string == "Unknown":
+        return ["unknown"]
     split_cast = re.split("\n|,\n|, |\r| & |Cast: | and ", cast_string)
     if len(split_cast) == 1 and split_cast[0] == '':
         return split_cast
@@ -68,11 +73,11 @@ class Preprocessor:
         self.movies_data['Genre'] = self.movies_data['Genre'].fillna('unknown')
         self.movies_data['Genre'] = self.movies_data['Genre'].apply(lambda genre: clean_genre(genre))
 
-        for key, value in sorted(genre_frequency.items(), key=lambda x:-x[1]):
-            print(f"{key}: {value}")
-
         self.movies_data['Cast'] = self.movies_data['Cast'].fillna('')
         self.movies_data['Cast'] = self.movies_data['Cast'].apply(lambda cast: clean_cast(cast))
+
+        self.movies_data['Director'] = self.movies_data['Director'].fillna('')
+        self.movies_data['Director'] = self.movies_data['Director'].apply(lambda director: clean_directors(director))
 
         # i = 0 start movie id
         # while loop till reading data done
