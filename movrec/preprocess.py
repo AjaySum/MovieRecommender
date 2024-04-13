@@ -56,6 +56,12 @@ class Preprocessor:
 
         self.movies_data['Director'] = self.movies_data['Director'].fillna('unknown')
         self.movies_data['Director'] = self.movies_data['Director'].apply(lambda director: clean_directors(director))
+    
+        self.movies_data['Plot'] = self.movies_data['Plot'].fillna('unknown')
+        self.movies_data['Plot'] = self.movies_data['Plot'].apply(lambda plot: plot.replace("\n", " ").replace("\r", " "))
+
+        self.movies_data['PlotSummary'] = self.movies_data['PlotSummary'].fillna('unknown')
+        self.movies_data['PlotSummary'] = self.movies_data['PlotSummary'].apply(lambda summary: summary.replace("\n", " ").replace("\r", " "))
 
 
     def printAll(self):
