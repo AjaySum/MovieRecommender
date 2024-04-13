@@ -9,6 +9,7 @@ from torchtext.vocab import Vectors
 from sklearn.metrics.pairwise import cosine_similarity
 import nltk
 import os
+import pickle
 nltk.download('punkt')
 
 
@@ -21,58 +22,76 @@ class SimilarityCalculator():
 
     # key is tuple (id1, id2) and value is similarity score
     summariesSimilarity = {}
-    fullPlots = [] # sorted by id
+    fullPlotSimilarity = {}
+    fullPlotVecs = {} # sorted by id
     summaryVecs = {} # sorted by id
+    fullPlots = []
+
     ids = []
 
     def __init__(self, fullPlotsDoc, summariesDoc):
-        self.fullPlotsDoc = fullPlotsDoc
-        self.summariesDoc = summariesDoc
+        self.fullPlotsDoc = f"preprocess_output/{fullPlotsDoc}"
+        self.summariesDoc = f"preprocess_output/{summariesDoc}"
     
-    def readIn(self):
+    def makeEmbeddings(self):
         with open(self.fullPlotsDoc, 'r') as file:
+            next(file)
             for line in file:
                 line = line.strip()
                 items = line.split('|')
                 self.ids.append(items[0])
-                self.fullPlots.append(items[1])
-                # self.summariesSimilarity[items[0]] = items[1]
+                self.fullPlotVecs[items[0]] = self.createEmbeddingVec(items[1])
         with open(self.summariesDoc, 'r') as file:
+            next(file)
             for line in file:
                 line = line.strip()
                 line = line.replace('"', '')
                 items = line.split('|')
-                self.summaryVecs[items[0]] = self.createSummaryVec(items[1])
+                self.summaryVecs[items[0]] = self.createEmbeddingVec(items[1])
+        with open('fullPlotEmbeddings.pkl', 'wb') as f:
+            # Pickle the dictionary and write it to the file
+            pickle.dump(self.fullPlotVecs, f)
+        
+        with open('summaryEmbeddings.pkl', 'wb') as f:
+            # Pickle the dictionary and write it to the file
+            pickle.dump(self.summaryVecs, f)
+        
+        
 
 
-    def createSummaryVec(self, summary):
-        words = nltk.word_tokenize(summary.lower())
+    def createEmbeddingVec(self, text):
+        words = nltk.word_tokenize(text.lower())
         word_embeddings = [self.wordVectors[word].numpy() for word in words if word in self.wordVectors.stoi]
         if word_embeddings:
-            paragraph_vector = torch.mean(torch.tensor(word_embeddings), dim=0)
+            word_embeddings_array = np.array(word_embeddings)
+            paragraph_vector = torch.mean(torch.tensor(word_embeddings_array), dim=0)
             return paragraph_vector
         else:
             return None
     
-    
-    def enc_summaries(self):
+
+    def enc(self, vector, key1):
+        answers = {}
         out_file = f"summaryEmbeddingScores.txt"
         sys.stdout = open(out_file, 'w')
-        for key1, val1 in self.summaryVecs.items():
-            for key2, val2 in self.summaryVecs.items():
-                if key1 != key2:
+        val1 = vector[key1]
+        for key2, val2 in vector.items():
+            if key1 != key2:
+                if val1 is not None and val2 is not None:
 
-                    if val1 is not None and val2 is not None:
-
-                        val1 = val1.reshape(1, -1)
-                        val2 = val2.reshape(1, -1)
-                        similarity = max(float(cosine_similarity(val1, val2)[0][0]), 0)
-                        print(f"{key1} {key2}|{similarity}") 
-                    else:
-                        print(f"{key1} {key2}|0") 
+                    val1 = val1.reshape(1, -1)
+                    val2 = val2.reshape(1, -1)
+                    similarity = max(float(cosine_similarity(val1, val2)[0][0]), 0)
+                    answers[(key1, key2)] = similarity
+                    # print(f"{key1} {key2}|{similarity}") 
+                else:
+                    answers[(key1, key2)] = 0
+                    # print(f"{key1} {key2}|0") 
+        return answers
+        
 
         
-    def tfIdf_fullPlots(self):
+    def tfIdf(self):
         out_file = f"fullPlotTfIdfScores.txt"
         sys.stdout = open(out_file, 'w')
         # for item in self.summaries:
@@ -99,10 +118,8 @@ class SimilarityCalculator():
 
 
 def main():
-    s = SimilarityCalculator("testFullPlots.csv", "testSummaries.csv")
-    s.readIn()
-    s.enc_summaries()
-    s.tfIdf_fullPlots()
+    s = SimilarityCalculator(fullPlotsDoc="fullplot.csv", summariesDoc="summaries.csv")
+    s.makeEmbeddings()
 
 if __name__ == "__main__":
     main()
