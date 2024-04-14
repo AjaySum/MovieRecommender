@@ -1,6 +1,7 @@
 import sys
 import re
 import os
+import pickle
 import pandas as pd
 
 genre_frequency = {}
@@ -64,45 +65,58 @@ class Preprocessor:
         self.movies_data['PlotSummary'] = self.movies_data['PlotSummary'].apply(lambda summary: summary.replace("\n", " ").replace("\r", " "))
 
 
-    def printAll(self):
+    def storeAll(self):
         # loop through movieids and print id | title \n
         current_directory = os.getcwd()
         final_directory = os.path.join(current_directory, r'preprocess_output')
+
+        name_id = {}
+        genre_ids = {}
+        id_cast_director = {}
+        id_year = {}
+        # id_rating = {}
+
         if not os.path.exists(final_directory):
             os.makedirs(final_directory)
-        with open("preprocess_output/titles.csv", 'w') as titles, open("preprocess_output/summaries.csv", 'w') as summaries, open("preprocess_output/fullplot.csv", 'w') as fullplot, open("preprocess_output/other.csv", 'w') as other:
-            titles.write("id|title\n")
+        with open("preprocess_output/summaries.csv", 'w') as summaries, open("preprocess_output/fullplot.csv", 'w') as fullplot:
             summaries.write("id|summary\n")
             fullplot.write("id|fullplot\n")
-            other.write("id|genre|release year|director|cast\n")
             for index, row in self.movies_data.iterrows():
-                titles.write(f"{index}|{row['Title']}\n")
                 summaries.write(f"{index}|{row['PlotSummary']}\n")
                 fullplot.write(f"{index}|{row['Plot']}\n")
 
-                other_string = str(index) + "|"
-
-                for index, genre in enumerate(row['Genre']):
-                    other_string += genre if index == 0 else "," + genre
-
-                other_string += "|" + str(row['Release Year']) + "|"
-
-                for index, director in enumerate(row['Director']):
-                    other_string += director if index == 0 else "," + director
+                name_id[row['Title']] = index
                 
-                other_string += "|"
+                for genre in row['Genre']:
+                    if genre not in genre_ids:
+                        genre_ids[genre] = []
+                    genre_ids[genre].append(index)
+                
+                id_cast_director[index] = {"cast":[], "director":[]}
+                id_cast_director[index]['cast'] = row['Cast']
+                id_cast_director[index]['director'] = row['Director']
 
-                for index, cast in enumerate(row['Cast']):
-                    other_string += cast if index == 0 else "," + cast
+                id_year[index] = row['Release Year']
 
-                other.write(other_string+"\n")
+        # Save each dict to pickle
+        with open('preprocess_output/name_id.pkl', 'wb') as pickle_file:
+            pickle.dump(name_id, pickle_file)
+        
+        with open('preprocess_output/genre_id.pkl', 'wb') as pickle_file:
+            pickle.dump(genre_ids, pickle_file)
+
+        with open('preprocess_output/id_castdirector.pkl', 'wb') as pickle_file:
+            pickle.dump(id_cast_director, pickle_file)
+        
+        with open('preprocess_output/id_year.pkl', 'wb') as pickle_file:
+            pickle.dump(id_year, pickle_file)
 
 
 def main():
     movies_csv = sys.argv[1]
     p = Preprocessor(movies_csv)
     p.clean()
-    p.printAll()
+    p.storeAll()
 
 
 if __name__ == "__main__":
