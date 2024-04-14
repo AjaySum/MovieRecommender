@@ -48,11 +48,17 @@ class SimilarityCalculator():
                 line = line.replace('"', '')
                 items = line.split('|')
                 self.summaryVecs[items[0]] = self.createEmbeddingVec(items[1])
-        with open('fullPlotEmbeddings.pkl', 'wb') as f:
+        
+        current_directory = os.getcwd()
+        final_directory = os.path.join(current_directory, r'similarities_output')
+        if not os.path.exists(final_directory):
+            os.makedirs(final_directory)
+
+        with open('similarities_output/fullPlotEmbeddings.pkl', 'wb') as f:
             # Pickle the dictionary and write it to the file
             pickle.dump(self.fullPlotVecs, f)
         
-        with open('summaryEmbeddings.pkl', 'wb') as f:
+        with open('similarities_output/summaryEmbeddings.pkl', 'wb') as f:
             # Pickle the dictionary and write it to the file
             pickle.dump(self.summaryVecs, f)
         
