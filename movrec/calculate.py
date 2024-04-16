@@ -39,38 +39,40 @@ class Calculate():
         # initialize all docs and queryStr
         self.queryStr = None
         self.queryId = -1
+        print("Reading in data...")
         self.readIn()
 
     def factors(self):
-
-
-
+        print("Scoring full plots...")
         self.fullPlotScores = self.encoding(self.fullplot_embeddings)
+        print("Scoring summaries...")
         self.summariesScores = self.encoding(self.summary_embeddings)
-        for key, fpVal in self.fullPlotScores:  
+        for key, fpVal in self.fullPlotScores.items():  
             self.finalScores[key] = (self.fp_w * fpVal) + (self.s_w * self.summariesScores[key])
-        
 
         self.finalScores = dict(sorted(self.finalScores.items(), key=lambda item: item[1], reverse=True))
         # Get the top 25 items 
         self.finalScores = dict(list(self.finalScores.items())[:25])
         # get cast + director 
+        print("Scoring cast and directors...")
+        self.castDirectorScoreCalc()
         # get genre
+        print("Scoring genres...")
+        self.genreScore()
         # get yr
+        print("Done scoring!")
 
 
     def castDirectorScoreCalc(self):
-        id1Cast = set(self.id_castdirector['cast'][self.queryId])
-        id1Directors = set(self.id_castdirector['director'][self.queryId])
+        print("Scoring cast and directors...")
+        id1Cast = set(self.id_castdirector[self.queryId]['cast'])
+        id1Directors = set(self.id_castdirector[self.queryId]['director'])
         for id2 in self.finalScores.keys():
-            id2Cast = set(self.id_castdirector[id2])
-            id2Directors = set(self.id_castdirector['director'][id2])
+            id2Cast = set(self.id_castdirector[id2]['cast'])
+            id2Directors = set(self.id_castdirector[id2]['director'])
             intersectionCast = id1Cast.intersection(id2Cast)
-            direc
-            self.finalScores[id2] += self.c_w * (len(intersectionCast)/len(id1Cast))
-
-
-
+            intersectionDirectors = id1Directors.intersection(id2Directors)
+            self.finalScores[id2] += self.c_w * (len(intersectionCast)/len(id1Cast)) + self.d_w * (len(intersectionDirectors)/len(id2Cast))
 
     def encoding(self, vectorDict):
         answers = {}
@@ -88,25 +90,25 @@ class Calculate():
         
     def genreFilter(self):
         # filter based on genres. keep all unknowns and add all filtered to relevIds
-        query_genres = set(self.id_genres[self.queryId].lower().split)
+        query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
 
-        for genre, ids in self.genres.items():
+        for genre, ids in self.genre_ids.items():
             if genre in query_genres or genre == 'unknown':
                 for movie_id in ids:
                     self.relevIds.add(movie_id)
                 
     def genreScore(self):
+        query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
         #update final score based on weights, (global)
         for movie_id in self.finalScores:
             movie_genres = set()
-            for genre, ids in self.genres.items():
+            for genre, ids in self.genre_ids.items():
                 if movie_id in ids:
                     movie_genres.add(genre)
         #don't use query genres since can't read
             intersection = query_genres.intersection(movie_genres)
             union = query_genres.union(movie_genres)
-            len(intersection) / len(union)
-            #self.genreScores[movie_id] = 0 if len(union)
+            self.finalScores[movie_id] += self.g_w * (len(intersection) / len(union))
 
 
     def readIn(self):
@@ -141,14 +143,18 @@ class Calculate():
 
     def calculateScore(self):
         # Should return the top 25
+        print("Filtering genres...")
         self.genreFilter()
         
         # Delete query movie from relevIds
         if self.queryId in self.relevIds:
-            del self.relevIds[self.queryId]    
-        finalScores
+            self.relevIds.remove(self.queryId)
+        
+        print("Starting scoring...")
+        self.factors()
+        print("Sorting results...")
+        return sorted(self.finalScores.items(), key=lambda x: -x[1])
 
-    
     def findId(self, query):
         if query in self.name_id:
             self.queryId = self.name_id[query]
@@ -166,7 +172,9 @@ def main():
             continue
         top25 = c.calculateScore()
         
-        getMore = input("Do you want 5 more suggestions:")
+        for id, score in top25:
+            print(f"{id} {c.id_name[id]}: {score}\n{c.id_summary[id]}")
+        # getMore = input("Do you want 5 more suggestions:")
         
         #print(next 5 rank)
         

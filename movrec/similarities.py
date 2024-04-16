@@ -38,15 +38,15 @@ class SimilarityCalculator():
             for line in file:
                 line = line.strip()
                 items = line.split('|')
-                self.ids.append(items[0])
-                self.fullPlotVecs[items[0]] = self.createEmbeddingVec(items[1])
+                self.ids.append(int(items[0]))
+                self.fullPlotVecs[int(items[0])] = self.createEmbeddingVec(items[1])
         with open(self.summariesDoc, 'r') as file:
             next(file)
             for line in file:
                 line = line.strip()
                 line = line.replace('"', '')
                 items = line.split('|')
-                self.summaryVecs[items[0]] = self.createEmbeddingVec(items[1])
+                self.summaryVecs[int(items[0])] = self.createEmbeddingVec(items[1])
         
         current_directory = os.getcwd()
         final_directory = os.path.join(current_directory, r'similarities_output')
@@ -73,12 +73,8 @@ class SimilarityCalculator():
             return paragraph_vector
         else:
             return None
-    
 
 
-        
-
-        
     def tfIdf(self):
         out_file = f"fullPlotTfIdfScores.txt"
         sys.stdout = open(out_file, 'w')
