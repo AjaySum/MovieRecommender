@@ -40,8 +40,6 @@ class Calculate():
         self.queryId = -1
         print("Reading in data...")
         self.readIn()
-        self.finalScores = {movie_id: 0 for movie_id in self.ids}
-        self.query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
 
     def factors(self):
         print("Scoring full plots...")
@@ -101,29 +99,26 @@ class Calculate():
         return answers 
         
     def genreFilter(self):
-        # Apply genre filter based on the query genres, add all filtered to relevIds
+        # filter based on genres. keep all unknowns and add all filtered to relevIds
+        query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
+
         for genre, ids in self.genre_ids.items():
-            if genre in self.query_genres or genre == 'unknown':
+            if genre in query_genres or genre == 'unknown':
                 for movie_id in ids:
                     self.relevIds.add(movie_id)
-    
+                
     def genreScore(self):
-
+        query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
+        # update final score based on weights, (global)
         for movie_id in self.finalScores:
             movie_genres = set()
-            
-            #set of genres for current movie
             for genre, ids in self.genre_ids.items():
                 if movie_id in ids:
-                    movie_genres.add(genre.lower())
-            
-            #Jaccard sim between query and movie genres
-            intersection = self.query_genres.intersection(movie_genres)
-            union = self.query_genres.union(movie_genres)
-            jaccard_similarity = len(intersection) / len(union) if union else 0
-
-            
-            self.finalScores[movie_id] += self.g_w * jaccard_similarity
+                    movie_genres.add(genre)
+        # don't use query genres since can't read
+            intersection = query_genres.intersection(movie_genres)
+            union = query_genres.union(movie_genres)
+            self.finalScores[movie_id] += self.g_w * (len(intersection) / len(union))
 
 
     def readIn(self):
