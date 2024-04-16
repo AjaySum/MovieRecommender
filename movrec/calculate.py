@@ -31,6 +31,8 @@ class Calculate():
     c_w = 0.1 # cast weight
     y_w = 0.02 # year weight
     g_w = 0.15 # genre weight
+
+    constWeights = {"fp_w": 0.26, "s_w": 0.37, "d_w": 0.1, "c_w": 0.1, "y_w": 0.02, "g_w": 0.15}
     
     queryId = -1
 
@@ -41,6 +43,18 @@ class Calculate():
         print("Reading in data...")
         self.readIn()
 
+    def updateWeights(self, inc):
+        self.fp_w = self.constWeights["fp_w"] + (inc["fp_w"] - 3) * 0.15 * self.constWeights["fp_w"]
+        self.s_w = self.constWeights["s_w"] + (inc["s_w"] - 3) * 0.15 * self.constWeights["s_w"]
+        self.d_w = self.constWeights["d_w"] + (inc["d_w"] - 3) * 0.15 * self.constWeights["d_w"]
+        self.c_w = self.constWeights["c_w"] + (inc["c_w"] - 3) * 0.15 * self.constWeights["c_w"]
+        self.y_w = self.constWeights["y_w"] + (inc["y_w"] - 3) * 0.15 * self.constWeights["y_w"]
+        self.g_w = self.constWeights["g_w"] + (inc["g_w"] - 3) * 0.15 * self.constWeights["g_w"]
+
+        
+
+
+    
     def factors(self):
         print("Scoring full plots...")
         self.fullPlotScores = self.encoding(self.fullplot_embeddings)
