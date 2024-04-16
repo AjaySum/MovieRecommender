@@ -32,8 +32,6 @@ class Calculate():
     y_w = 0.02 # year weight
     g_w = 0.15 # genre weight
     
-    
-    
     queryId = -1
 
     def __init__(self):
@@ -68,7 +66,7 @@ class Calculate():
     def yrScoreCalc(self):
         # penalize based on how far the year is
         for id2 in self.finalScores.keys():
-            diff = self.id_year[id2] -self.id_year[self.queryId]
+            diff = abs(self.id_year[id2] -self.id_year[self.queryId])
             ans = math.log(1/(diff + 1))
             ans /= math.log(1/117)
             ans *= -1
@@ -176,16 +174,35 @@ class Calculate():
 def main():
     # Test with beauty and the beast
     c = Calculate() # add parameters
-    endFlag = False
-    while not endFlag:
-        movieName = input("Enter a movie name to find recommendations for: ")
+    while True:
+        endPrompt = 'x'
+        while endPrompt != 'y' and endPrompt != 'n':
+            endPrompt = input("Do you want a recommendation for a movie? (Y/N)").strip().lower()
+        if endPrompt == 'n':
+            print("Thanks for using our recommender!")
+            return()
+
+        movieName = input("Enter a movie name to find recommendations for:")
         if not c.findId(movieName):
             print("Invalid Movie Name")
             continue
         top25 = c.calculateScore()
         
+        next5 = 0
         for id, score in top25:
-            print(f"{id} {c.id_name[id]}: {score}\n{c.id_summary[id]}")
+            if next5 < 5:
+                print(f"{id} {c.id_name[id]}: {score}\n{c.id_summary[id]}")
+                next5 += 1
+            else:
+                getMore = 'x'
+                while getMore != 'y' and getMore != 'n':
+                    getMore = input("Do you want 5 more suggestions? (Y/N)").strip().lower()
+                if getMore == 'y':
+                    next5 = 0
+                else:
+                    break
+        
+            
         # getMore = input("Do you want 5 more suggestions:")
         
         #print(next 5 rank)
