@@ -22,14 +22,10 @@ start () {
     mkdir -p var/log
     rm -f var/log/recommend.log
     flask --app recommend run --host 0.0.0.0 --port 9000 >> var/log/recommend.log 2>&1 &
-    flask --app recommend run --host 0.0.0.0 --port 9001 >> var/log/recommend.log 2>&1 &
-    flask --app recommend run --host 0.0.0.0 --port 9002 >> var/log/recommend.log 2>&1 &
 }
 
 stop () {
 	pkill -f "flask --app recommend run --host 0.0.0.0 --port 9000" || true
-    pkill -f "flask --app recommend run --host 0.0.0.0 --port 9001" || true
-    pkill -f "flask --app recommend run --host 0.0.0.0 --port 9002" || true
 }
 
 restart () {
@@ -40,17 +36,14 @@ restart () {
 
 status () {
     set +o pipefail
-    NPROCS=$(pgrep -f "flask --app recommend run --host 0.0.0.0 --port 900[0-2]" | wc -l)
+    NPROCS=$(pgrep -f "flask --app recommend run --host 0.0.0.0 --port 9000" | wc -l)
     set -o pipefail
-    if [ "$NPROCS" -eq 3 ]; then
+    if [ "$NPROCS" -eq 1 ]; then
         echo "recommend server running"
         exit
     elif [ "$NPROCS" -eq 0 ]; then
         echo "recommend server stopped"
         exit 1
-    else
-        echo "recommend server error: found ${NPROCS} processes, expected 3"
-        exit 2
     fi
 }
 

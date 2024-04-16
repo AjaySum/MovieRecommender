@@ -26,8 +26,8 @@
                 {% if noresults %}
                     <div class="no_results">No recommendations found!</div>
                 {% else %}
-                    {% for film in films %}
-                        <div class="film_title">{{film}}</div>
+                    {% for recommendation in recommend %}
+                        <div class="film_title">{{recommendation}}</div>
                     {% endfor %}
                 {% endif %}
             </div>
