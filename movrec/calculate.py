@@ -3,6 +3,7 @@
 import os
 import pickle
 from sklearn.metrics.pairwise import cosine_similarity
+import math
 
 class Calculate():
     relevIds = set()
@@ -24,11 +25,11 @@ class Calculate():
     finalScores = {}
 
     # set weights
-    fp_w = 0.25 # full plot weight 
-    s_w = 0.35 # summary weight
+    fp_w = 0.26 # full plot weight 
+    s_w = 0.37 # summary weight
     d_w = 0.1 # director weight
     c_w = 0.1 # cast weight
-    y_w = 0.05 # year weight
+    y_w = 0.02 # year weight
     g_w = 0.15 # genre weight
     
     
@@ -60,9 +61,20 @@ class Calculate():
         print("Scoring genres...")
         self.genreScore()
         # get yr
+        self.yrScoreCalc()
         print("Done scoring!")
 
 
+    def yrScoreCalc(self):
+        # penalize based on how far the year is
+        for id2 in self.finalScores.keys():
+            diff = self.id_year[id2] -self.id_year[self.queryId]
+            ans = math.log(1/(diff + 1))
+            ans /= math.log(1/117)
+            ans *= -1
+            self.finalScores[id2] += self.y_w * ans
+
+    
     def castDirectorScoreCalc(self):
         print("Scoring cast and directors...")
         id1Cast = set(self.id_castdirector[self.queryId]['cast'])
@@ -99,13 +111,13 @@ class Calculate():
                 
     def genreScore(self):
         query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
-        #update final score based on weights, (global)
+        # update final score based on weights, (global)
         for movie_id in self.finalScores:
             movie_genres = set()
             for genre, ids in self.genre_ids.items():
                 if movie_id in ids:
                     movie_genres.add(genre)
-        #don't use query genres since can't read
+        # don't use query genres since can't read
             intersection = query_genres.intersection(movie_genres)
             union = query_genres.union(movie_genres)
             self.finalScores[movie_id] += self.g_w * (len(intersection) / len(union))
