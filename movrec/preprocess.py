@@ -71,9 +71,12 @@ class Preprocessor:
         final_directory = os.path.join(current_directory, r'preprocess_output')
 
         name_id = {}
+        id_name = {}
+        id_genres = {}
         genre_ids = {}
         id_cast_director = {}
         id_year = {}
+        id_summary = {}
         # id_rating = {}
 
         if not os.path.exists(final_directory):
@@ -86,7 +89,11 @@ class Preprocessor:
                 fullplot.write(f"{index}|{row['Plot']}\n")
 
                 name_id[row['Title']] = index
+
+                id_name[index] = row['Title']
                 
+                id_genres[index] = row['Genre']
+
                 for genre in row['Genre']:
                     if genre not in genre_ids:
                         genre_ids[genre] = []
@@ -98,11 +105,19 @@ class Preprocessor:
 
                 id_year[index] = row['Release Year']
 
+                id_summary[index] = row['PlotSummary']
+
         # Save each dict to pickle
         with open('preprocess_output/name_id.pkl', 'wb') as pickle_file:
             pickle.dump(name_id, pickle_file)
+
+        with open('preprocess_output/id_name.pkl', 'wb') as pickle_file:
+            pickle.dump(id_name, pickle_file)
+
+        with open('preprocess_output/id_genres.pkl', 'wb') as pickle_file:
+            pickle.dump(id_genres, pickle_file)
         
-        with open('preprocess_output/genre_id.pkl', 'wb') as pickle_file:
+        with open('preprocess_output/genre_ids.pkl', 'wb') as pickle_file:
             pickle.dump(genre_ids, pickle_file)
 
         with open('preprocess_output/id_castdirector.pkl', 'wb') as pickle_file:
@@ -110,6 +125,9 @@ class Preprocessor:
         
         with open('preprocess_output/id_year.pkl', 'wb') as pickle_file:
             pickle.dump(id_year, pickle_file)
+        
+        with open('preprocess_output/id_summary.pkl', 'wb') as pickle_file:
+            pickle.dump(id_summary, pickle_file)
 
 
 def main():
@@ -117,6 +135,9 @@ def main():
     p = Preprocessor(movies_csv)
     p.clean()
     p.storeAll()
+    with open('top_genres.txt', 'w') as f:
+        for genre, freq in sorted(genre_frequency.items(), key= lambda x: -x[1]):
+            f.write(f"{genre} {freq}\n")
 
 
 if __name__ == "__main__":

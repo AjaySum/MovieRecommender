@@ -6,7 +6,6 @@ import numpy as np
 import torch
 import sys
 from torchtext.vocab import Vectors
-from sklearn.metrics.pairwise import cosine_similarity
 import nltk
 import os
 import pickle
@@ -76,24 +75,7 @@ class SimilarityCalculator():
             return None
     
 
-    def enc(self, vector, key1):
-        answers = {}
-        out_file = f"summaryEmbeddingScores.txt"
-        sys.stdout = open(out_file, 'w')
-        val1 = vector[key1]
-        for key2, val2 in vector.items():
-            if key1 != key2:
-                if val1 is not None and val2 is not None:
 
-                    val1 = val1.reshape(1, -1)
-                    val2 = val2.reshape(1, -1)
-                    similarity = max(float(cosine_similarity(val1, val2)[0][0]), 0)
-                    answers[(key1, key2)] = similarity
-                    # print(f"{key1} {key2}|{similarity}") 
-                else:
-                    answers[(key1, key2)] = 0
-                    # print(f"{key1} {key2}|0") 
-        return answers
         
 
         
