@@ -191,7 +191,7 @@ def main():
         next5 = 0
         for id, score in top25:
             if next5 < 5:
-                print(f"{id} {c.id_name[id]}: {score}\n{c.id_summary[id]}")
+                print(f"{id} {c.id_name[id]}: {score}\n{c.id_summary[id]}\n")
                 next5 += 1
             else:
                 getMore = 'x'
