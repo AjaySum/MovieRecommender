@@ -15,6 +15,14 @@ def get_api():
     return flask.jsonify(**context)
 
 
+@recommend.app.route("/api/v1/titles/")
+def get_titles():
+    context = {
+        "titles": [title for title in recommend.api.c.id_name.values()]
+    }
+    return flask.jsonify(**context)
+
+
 @recommend.app.route("/api/v1/recommend/")
 def get_hits():
     """Return a list of recommended movies."""
@@ -46,12 +54,16 @@ def get_hits():
     if g_w is None:
         return flask.Response(status=400)
     
+    l_w = int(flask.request.args.get('l_w', 3))
+    if l_w is None:
+        return flask.Response(status=400)
+    
     context = {
                 "recommend": []
             }
     
     this_c = recommend.api.c
-    this_c.currLev = {"fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w}
+    this_c.currLev = {"fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "l_w": l_w}
     this_c.updateWeights()
     if not this_c.findId(query):
         return flask.response(status=400)
@@ -62,6 +74,7 @@ def get_hits():
         context["recommend"].append({
             "name": this_c.id_name[movie],
             "year": this_c.id_year[movie],
+            "language": this_c.origin_language[movie][0],
             "genres": ", ".join([genre.capitalize() for genre in this_c.id_genres[movie]]),
             "summary": this_c.id_summary[movie]
         })

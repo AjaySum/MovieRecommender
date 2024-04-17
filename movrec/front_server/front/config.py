@@ -8,3 +8,6 @@ DATABASE_FILENAME = SEARCH_ROOT/'var'/'film.sqlite3'
 SEARCH_INDEX_SEGMENT_API_URLS = [
     "http://localhost:9000/api/v1/recommend/"
 ]
+TITLES_INDEX_SEGMENT_API_URLS = [
+    "http://localhost:9000/api/v1/titles/"
+]

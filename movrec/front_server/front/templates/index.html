@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Movie Recommender</title>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="{{ url_for('static', filename='js/index.js') }}" defer></script> 
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   </head>
@@ -18,8 +17,10 @@
                 MovRec
             </div>
 
-            <form action="/" method="GET">
-                <div><input type="text" name="q" value="{{q}}"/></div>
+            <form autcomplete="off" action="/" method="GET">
+                <div class="autocomplete">
+                    <input id="type" type="text" name="q" value="{{q}}"/>
+                </div>
                 <div id="weights">
                     <div class="flex-item">
                         <div class="pagerank_weight">Full Plot Weight: <span id="fpwval">{{fp_w}}</span></div>
@@ -50,6 +51,11 @@
                         <div class="pagerank_weight">Genre Weight: <span id="gwval">{{g_w}}</span></div>
                         <div><input id="gwrange" type="range" name="g_w" min=1 max=5 step=1 value="{{g_w}}"/></div>
                     </div>
+                    
+                    <div class="flex-item">
+                        <div class="pagerank_weight">Origin Weight: <span id="lwval">{{l_w}}</span></div>
+                        <div><input id="lwrange" type="range" name="l_w" min=1 max=5 step=1 value="{{g_w}}"/></div>
+                    </div>
                 </div>
                 <input type="submit" value="Recommend"/>
             </form>
@@ -60,9 +66,11 @@
                 {% else %}
                     {% for recommendation in recommend %}
                         <div class="recommendation">
-                            <div class="rec_title"><b>{{recommendation.name}}</b></h2></div>
-                            <div class="rec_details"><b>Genres</b>: {{recommendation.genres}} | <b>Release Year</b>: {{recommendation.year}}</div>
-                            <div class="rec_summary">{{recommendation.summary}}</div>
+                            <div class="recommendation_center">
+                                <div class="rec_title"><b>{{recommendation.name}}</b></h2></div>
+                                <div class="rec_details"><b>Origin</b>: {{recommendation.language}} | <b>Genres</b>: {{recommendation.genres}} | <b>Release Year</b>: {{recommendation.year}}</div>
+                                <div class="rec_summary">{{recommendation.summary}}</div>
+                            </div>
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -70,6 +78,9 @@
         </div>
     </main>
 
-	<script src="index.js"></script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script> 
+    <script type="text/javascript">
+        autofill_movies("{{titles}}");
+    </script>
   </body>
 </html>

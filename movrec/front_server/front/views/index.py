@@ -5,7 +5,6 @@ URLs include:
 /
 """
 import threading
-import heapq
 import time
 import flask
 import front
@@ -43,16 +42,29 @@ def show_index():
     g_w = flask.request.args.get('g_w')
     if g_w is None:
         g_w = 3
-    
 
-    # connect to db
-    context = {"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "noresults": False}
+    l_w = flask.request.args.get('l_w')
+    if l_w is None:
+        l_w = 3
+    
+    titles = []
+    threads = []
+    for api_url in front.app.config['TITLES_INDEX_SEGMENT_API_URLS']:
+        thread = threading.Thread(target=request_titles, args=(titles, api_url,))
+        thread.start()
+        threads.append(thread)
+    time.sleep(0.1)
+    for thread in threads:
+        thread.join()
+
+    print(titles)
+    context = {"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "l_w": l_w, "noresults": False, "titles":'| '.join(titles[0])}
 
     # Create a thread for each index server
     threads = []
     films = []
     for api_url in front.app.config['SEARCH_INDEX_SEGMENT_API_URLS']:
-        thread = threading.Thread(target=request_index, args=(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w,))
+        thread = threading.Thread(target=request_index, args=(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w, l_w,))
         thread.start()
         threads.append(thread)
     # pass execution to the request_index function for a second
@@ -65,9 +77,14 @@ def show_index():
     print(context)
     return flask.render_template("index.html", **context)
 
-def request_index(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w):
+def request_titles(titles, api_url):
+    response = requests.get(api_url)
+    if response.status_code == 200:
+        titles.append(response.json()["titles"])
+
+def request_index(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w, l_w):
     """Send get requests to index servers and append results."""
-    response = requests.get(api_url, params={"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w}, timeout=None)
+    response = requests.get(api_url, params={"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "l_w": l_w}, timeout=None)
     # append dictionary to hits
     if response.status_code == 200:
         films.append(response.json()["recommend"])
