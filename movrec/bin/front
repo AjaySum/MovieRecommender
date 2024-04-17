@@ -17,14 +17,6 @@ start () {
     echo "Error: front server already running"
     exit 1
   fi
-
-  if [ ! -f "var/film.sqlite3" ]
-	then
-		echo "Error: can't find front database var/film.sqlite3"
-    echo "Try: ./bin/filmdb create"
-		exit 1
-	fi
-
   recommend=
   if [[ $(pgrep -f "flask --app recommend run --host 0.0.0.0 --port 900[0-2]") ]]; then
     echo "starting front server ..."

@@ -18,7 +18,7 @@ def get_api():
 @recommend.app.route("/api/v1/titles/")
 def get_titles():
     context = {
-        "titles": [title for title in recommend.api.c.id_name.values()]
+        "titles": [title for title in recommend.api.c.name_id.keys()]
     }
     return flask.jsonify(**context)
 

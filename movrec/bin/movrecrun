@@ -1,0 +1,12 @@
+#!/bin/bash
+# Stop on errors, print commands
+# See https://vaneyckt.io/posts/safer_bash_scripts_with_set_euxo_pipefail/
+set -Eeuo pipefail
+set -x
+
+./bin/install
+./bin/recommend start
+until ./bin/front start
+do
+    sleep 1
+done
