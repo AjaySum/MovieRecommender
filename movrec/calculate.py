@@ -33,6 +33,8 @@ class Calculate():
     g_w = 0.15 # genre weight
 
     constWeights = {"fp_w": 0.26, "s_w": 0.37, "d_w": 0.1, "c_w": 0.1, "y_w": 0.02, "g_w": 0.15}
+
+    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3}
     
     queryId = -1
 
@@ -43,16 +45,13 @@ class Calculate():
         print("Reading in data...")
         self.readIn()
 
-    def updateWeights(self, inc):
-        self.fp_w = self.constWeights["fp_w"] + (inc["fp_w"] - 3) * 0.15 * self.constWeights["fp_w"]
-        self.s_w = self.constWeights["s_w"] + (inc["s_w"] - 3) * 0.15 * self.constWeights["s_w"]
-        self.d_w = self.constWeights["d_w"] + (inc["d_w"] - 3) * 0.15 * self.constWeights["d_w"]
-        self.c_w = self.constWeights["c_w"] + (inc["c_w"] - 3) * 0.15 * self.constWeights["c_w"]
-        self.y_w = self.constWeights["y_w"] + (inc["y_w"] - 3) * 0.15 * self.constWeights["y_w"]
-        self.g_w = self.constWeights["g_w"] + (inc["g_w"] - 3) * 0.15 * self.constWeights["g_w"]
-
-        
-
+    def updateWeights(self):
+        self.fp_w = self.constWeights["fp_w"] + (self.currLev["fp_w"] - 3) * 0.15 * self.constWeights["fp_w"]
+        self.s_w = self.constWeights["s_w"] + (self.currLev["s_w"] - 3) * 0.15 * self.constWeights["s_w"]
+        self.d_w = self.constWeights["d_w"] + (self.currLev["d_w"] - 3) * 0.15 * self.constWeights["d_w"]
+        self.c_w = self.constWeights["c_w"] + (self.currLev["c_w"] - 3) * 0.15 * self.constWeights["c_w"]
+        self.y_w = self.constWeights["y_w"] + (self.currLev["y_w"] - 3) * 0.15 * self.constWeights["y_w"]
+        self.g_w = self.constWeights["g_w"] + (self.currLev["g_w"] - 3) * 0.15 * self.constWeights["g_w"]
 
     
     def factors(self):
@@ -184,19 +183,63 @@ class Calculate():
             self.queryId = self.name_id[query]
             return True
         return False
-        
+
+    def weightPrompter(self):
+        print("Weights are between 1-5, with 1 being the lowest and 5 being the highest.")
+        print("You can increase or decrease the weight of any factor relative to all other factors.")
+        print("Here are the current weights")
+        print(f"Full Plot weight: {self.currLev['fp_w']}")
+        print(f"Summary weight: {self.currLev['s_w']}")
+        print(f"Director weight: {self.currLev['d_w']}")
+        print(f"Cast weight: {self.currLev['c_w']}")
+        print(f"Year weight: {self.currLev['fp_w']}")
+        print(f"Genre weight: {self.currLev['g_w']}")
+        inp = 'x'
+        while (inp != 'y' and inp != 'n'):
+            inp = input("Do you want to adjust weights? (Y/N) ").strip().lower()
+            if (inp != 'y' and inp != 'n'):
+                print("Invalid input") 
+        if (inp == 'y'):
+            inp = input("Enter new 'Full Plot' weight between 1-5, or press any other character to skip: ")
+            if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
+                self.currLev["fp_w"] = int(inp)
+            inp = input("Enter new 'Summary' weight between 1-5, or press any other character to skip: ")
+            if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
+                self.currLev["s_w"] = int(inp)
+            inp = input("Enter new 'Director' weight between 1-5, or press any other character to skip: ")
+            if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
+                self.currLev["d_w"] = int(inp)
+            inp = input("Enter new 'Cast' weight between 1-5, or press any other character to skip: ")
+            if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
+                self.currLev["c_w"] = int(inp)
+            inp = input("Enter new 'Year' weight between 1-5, or press any other character to skip: ")
+            if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
+                self.currLev["y_w"] = int(inp)
+            inp = input("Enter new 'Genre' weight between 1-5, or press any other character to skip: ")
+            if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
+                self.currLev["g_w"] = int(inp)
+            self.updateWeights()
+        return
+            
+
 def main():
     # Test with beauty and the beast
     c = Calculate() # add parameters
     while True:
-        endPrompt = 'x'
-        while endPrompt != 'y' and endPrompt != 'n':
-            endPrompt = input("Do you want a recommendation for a movie? (Y/N)").strip().lower()
-        if endPrompt == 'n':
+        endPrompt = '-'
+        while endPrompt != 'm' and endPrompt != 'x':
+            endPrompt = input("Enter 'm' to get a movie recommendation, 'w' to adjust weights, and 'x' to exit: ")
+            if endPrompt == 'w':
+                c.weightPrompter()
+            elif endPrompt != 'm' and endPrompt != 'x':
+                print("Invalid Input")
+
+
+        if endPrompt == 'x':
             print("Thanks for using our recommender!")
             return()
 
-        movieName = input("Enter a movie name to find recommendations for:")
+        movieName = input("Enter a movie name to find recommendations for: ").strip()
         if not c.findId(movieName):
             print("Invalid Movie Name")
             continue
@@ -210,7 +253,7 @@ def main():
             else:
                 getMore = 'x'
                 while getMore != 'y' and getMore != 'n':
-                    getMore = input("Do you want 5 more suggestions? (Y/N)").strip().lower()
+                    getMore = input("Do you want 5 more suggestions? (Y/N) ").strip().lower()
                 if getMore == 'y':
                     next5 = 0
                 else:
