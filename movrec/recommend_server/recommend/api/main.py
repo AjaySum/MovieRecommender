@@ -1,5 +1,6 @@
 import recommend
 import pickle
+import math
 from sklearn.metrics.pairwise import cosine_similarity
 
 class Calculate():
@@ -14,6 +15,7 @@ class Calculate():
     id_summary = {}
     summary_embeddings = {}
     fullplot_embeddings = {}
+    origin_language = {}
 
     # key: id2
     fullPlotScores = {}
@@ -22,16 +24,17 @@ class Calculate():
     finalScores = {}
 
     # set weights
-    fp_w = 0.25 # full plot weight 
-    s_w = 0.35 # summary weight
+    fp_w = 0.26 # full plot weight 
+    s_w = 0.38 # summary weight
     d_w = 0.1 # director weight
-    c_w = 0.1 # cast weight
+    c_w = 0.01 # cast weight
     y_w = 0.05 # year weight
-    g_w = 0.15 # genre weight
+    g_w = 0.1 # genre weight
+    l_w = 0.3 # language weight
     
-    constWeights = {"fp_w": 0.26, "s_w": 0.37, "d_w": 0.1, "c_w": 0.1, "y_w": 0.02, "g_w": 0.15}
+    constWeights = {"fp_w": 0.26, "s_w": 0.38, "d_w": 0.1, "c_w": 0.01, "y_w": 0.05, "g_w": 0.1, "l_w": 0.3}
 
-    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3}
+    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3, "l_w": 3}
     
     queryId = -1
 
@@ -47,6 +50,7 @@ class Calculate():
         self.c_w = self.constWeights["c_w"] + (self.currLev["c_w"] - 3) * 0.15 * self.constWeights["c_w"]
         self.y_w = self.constWeights["y_w"] + (self.currLev["y_w"] - 3) * 0.15 * self.constWeights["y_w"]
         self.g_w = self.constWeights["g_w"] + (self.currLev["g_w"] - 3) * 0.15 * self.constWeights["g_w"]
+        self.l_w = self.constWeights["l_w"] + (self.currLev["l_w"] - 3) * 0.15 * self.constWeights["l_w"]
 
     def factors(self):
         print("Scoring full plots...")
@@ -67,7 +71,28 @@ class Calculate():
         print("Scoring genres...")
         self.genreScore()
         # get yr
+        print("Scoring year...")
+        self.yrScoreCalc()
+        print("Scoring language...")
+        self.languageScore()
         print("Done scoring!")
+
+    def yrScoreCalc(self):
+        # penalize based on how far the year is
+        for id2 in self.finalScores.keys():
+            diff = abs(self.id_year[id2] -self.id_year[self.queryId])
+            ans = math.log(1/(diff + 1))
+            ans /= math.log(1/117)
+            ans *= -1
+            self.finalScores[id2] += self.y_w * ans
+
+    def languageScore(self):
+        query_language = set(self.origin_language[self.queryId])
+        for movie_id in self.finalScores:
+            movie_language = set(self.origin_language[movie_id])
+            intersection = query_language.intersection(movie_language)
+            union = query_language.union(movie_language)
+            self.finalScores[movie_id] += self.l_w * (len(intersection) / len(union))
 
 
     def castDirectorScoreCalc(self):
@@ -117,6 +142,13 @@ class Calculate():
             union = query_genres.union(movie_genres)
             self.finalScores[movie_id] += self.g_w * (len(intersection) / len(union))
 
+    def languageScore(self):
+        query_language = set(self.origin_language[self.queryId])
+        for movie_id in self.finalScores:
+            movie_language = set(self.origin_language[movie_id])
+            intersection = query_language.intersection(movie_language)
+            union = query_language.union(movie_language)
+            self.finalScores[movie_id] += self.l_w * (len(intersection) / len(union))
 
     def readIn(self):
         # read in data into the dictionaries
@@ -146,6 +178,9 @@ class Calculate():
         
         with open('similarities_output/fullPlotEmbeddings.pkl', 'rb') as f:
             self.fullplot_embeddings = pickle.load(f)
+        
+        with open('preprocess_output/origin_language.pkl', 'rb') as f:
+            self.origin_language = pickle.load(f)
 
 
     def calculateScore(self):

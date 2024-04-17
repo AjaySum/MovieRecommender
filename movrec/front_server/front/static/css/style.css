@@ -54,7 +54,13 @@
 .recommendation {
   background-color: #f1f1f1;
   border-radius: 10px;
-  padding: 5px;
+  display: flex;
+  padding: 3px;
+  justify-content: center;
+}
+
+.recommendation_center {
+  width: 95%;
 }
 
 .rec_title {
@@ -63,25 +69,24 @@
   font-weight: normal;
   font-size: 26px;
   line-height: 30px;
-
+  margin-left: 10px;
   color: #2c456b;
-
   margin-top: 10px;
   padding-top: 10px;
 }
 
 .rec_details {
+  margin-left: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
-  line-height: 22px;
+  font-size: 16px;
+  line-height: 18px;
   color: #4779c4;
-  margin-top: 10px;
-  padding-top: 10px;
 }
 
 .rec_summary {
+  margin-left: 10px;
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -90,7 +95,7 @@
   color: #535353;
   margin-top: 10px;
   padding-top: 10px;
-  margin-bottom: 35px;
+  margin-bottom: 15px;
 }
 
 .no_results {
@@ -219,6 +224,7 @@ input[type=range]:focus::-moz-range-track {
   display: flex;
   flex-direction: column;
   position: absolute;
+  gap: 20px;
   width: 200px;
   left: 1146.5px;
   top: 134px;
@@ -226,4 +232,41 @@ input[type=range]:focus::-moz-range-track {
 
 .flex-item {
   width: 200px;
+}
+
+.autocomplete-items {
+  width: 786px;
+  left: 270px;
+  top: 120px;
+  position: absolute;
+
+  color: #313131;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+}
+
+.autocomplete-items div {
+  background: #F8F8F8;
+  border-color: transparent;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
 }

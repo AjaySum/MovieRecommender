@@ -74,6 +74,7 @@ class Calculate():
         print("Scoring genres...")
         self.genreScore()
         # get yr
+        print("Scoring year...")
         self.yrScoreCalc()
         # get language
         print("Scoring language...")
