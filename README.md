@@ -34,13 +34,22 @@ For a quick setup, follow these steps:
 
 ### Step 2: Create Dictionaries and Calculate Word Embeddings
 -  From the movrec directory (`eecs486-MovieRecommender/movrec/`), parse, clean, and refactor the dataset into dictionaries. To do this, run `python3 preprocess.py`.
-    - `preprocess.py`: Python script that preprocesses the Wikipedia Plot Data dataset. It cleans names by adding the release year if a duplicate name is found. It cleans genres by filling any empty genres with 'unknown', cleaning any unnecessary characters (e.g. hyphens and underscores), and also keeping genres with spaces in them (e.g. "romantic comedy"). It cleans cast and directors by splitting on delimeters and saving them as lists. It cleans plot and summary by replacing newlines with spaces. It finally cleans languages by replacing any underscores with spaces and splitting on delimeters. These data are all stored into dictionaries, mapping an id -> attribute. There are also dictionaries for genre -> ids (all ids of a genre), and name -> id. The output of this python script is a folder: `preprocess_output`, which contains the pickle files of all the dictionaries created.
+    - `preprocess.py`:
+      - **Input**: `Dataset filename`
+      - **Output**: `preprocess_output`
+      - **Description**: Python script that preprocesses the inputted dataset. It cleans names by adding the release year if a duplicate name is found. It cleans genres by filling any empty genres with 'unknown', cleaning any unnecessary characters (e.g. hyphens and underscores), and also keeping genres with spaces in them (e.g. "romantic comedy"). It cleans cast and directors by splitting on delimeters and saving them as lists. It cleans plot and summary by replacing newlines with spaces. It finally cleans languages by replacing any underscores with spaces and splitting on delimeters. These data are all stored into dictionaries, mapping an id -> attribute. There are also dictionaries for genre -> ids (all ids of a genre), and name -> id. The output of this python script is a folder: `preprocess_output`, which contains the pickle files of all the dictionaries created.
 - Create word embeddings for the plots and the summaries. To do this, run `python3 similarities.py`.
-    - `similarities.py`: Python script that...
+    - `similarities.py`:
+      - **Input**: None
+      - **Output**: `similarities_output`
+      - **Description**: Python script that...
 
 ### Step 3a: Calculate Recommendations
 - From `eecs486-MovieRecommender/movrec/)` run `python3 calculate.py`. This will launch a command-line application to calculate recommendations for a queried movie. Follow the prompts of the app to receive recommendations.
-  - `calculate.py`: Python script that...
+  - `calculate.py`:
+     - **Input**: None
+     - **Output**: None
+     - **Description**: Python script that...
 
 ### Step 3b: Graphical User Interface for Recommendations
 - From `eecs486-MovieReocmmender/movrec/)` run `./bin/movrecrun`. This will launch a web server hosted on [localhost](http://localhost:8000) where you can interact with the recommender system through a user interface. You do not need to run `python3 calculate.py` before running the web servers.
