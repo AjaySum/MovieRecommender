@@ -117,14 +117,16 @@ class Calculate():
         return answers 
         
     def genreFilter(self):
-        # filter based on genres. keep all unknowns and add all filtered to relevIds
         query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
+        query_language = set(self.origin_language[self.queryId])
 
         for genre, ids in self.genre_ids.items():
             if genre in query_genres or genre == 'unknown':
                 for movie_id in ids:
-                    self.relevIds.add(movie_id)
-                
+                    #Filter language
+                    if set(self.origin_language[movie_id]) == query_language:
+                        self.relevIds.add(movie_id)
+
     def genreScore(self):
         query_genres = set([x.lower() for x in self.id_genres[self.queryId]])
         # update final score based on weights, (global)
@@ -138,15 +140,17 @@ class Calculate():
             union = query_genres.union(movie_genres)
             self.finalScores[movie_id] += self.g_w * (len(intersection) / len(union))
 
+                
     def languageScore(self):
         query_language = set(self.origin_language[self.queryId])
         for movie_id in self.finalScores:
             movie_language = set(self.origin_language[movie_id])
-            intersection = query_language.intersection(movie_language)
-            union = query_language.union(movie_language)
-            self.finalScores[movie_id] += self.l_w * (len(intersection) / len(union))
+            if query_language == movie_language:
+                self.finalScores[movie_id] += self.l_w * 1
+            else:
+                self.finalScores[movie_id] += self.l_w * -1
 
-
+ 
     def readIn(self):
         # read in data into the dictionaries
         with open('preprocess_output/genre_ids.pkl', 'rb') as f:
