@@ -27,13 +27,35 @@ For a quick setup, follow these steps:
 
 ## Detailed Instructions: Manual Setup
 ### Step 1: Initial Setup
-  - Install the Stanford Glove.6B Word Embeddings here: [glove.6B dataset](https://nlp.stanford.edu/data/glove.6B.zip). Unzip this directory to `eecs486-MovieRecommender/`.
-  - Then, we create the virtual environment and download the required libraries. To do this, run `cd movrec` and run `python3 -m venv env` to create the environment. Then run `source env/bin/activate` to activate the environment and run `pip install -r requirements.txt`.
-  - Then, we have to install the dataset. To do this, run `python3 dataset.py`.
-      - `dataset.py`: Python script that uses the huggingface datasets library to download the Wikipedia Plot Data dataset.
+  - Install the Stanford Glove.6B Word Embeddings here: [glove.6B dataset](https://nlp.stanford.edu/data/glove.6B.zip). Unzip this directory to the repository root directory (`eecs486-MovieRecommender/`).
+  - Create the virtual environment and download the required libraries. To do this, run `cd movrec` and run `python3 -m venv env` to create the environment. Then run `source env/bin/activate` to activate the environment and run `pip install -r requirements.txt`.
+  - Install the dataset. To do this, run `python3 dataset.py`.
+      - `dataset.py`:
+        - **Input**: None
+        - **Output**: `movies_dataset.csv`
+        - **Description**: Python script that uses the huggingface `datasets` library to download the Wikipedia Plot Data dataset.
 
-### Step 2: Install the Dataset
--  From the root (`eecs486-MovieRecommender/`), run `cd movrec` and then run `python3 dataset.py
+### Step 2: Create Dictionaries and Calculate Word Embeddings
+-  From the movrec directory (`eecs486-MovieRecommender/movrec/`), parse, clean, and refactor the dataset into dictionaries. To do this, run `python3 preprocess.py`.
     - `preprocess.py`:
+      - **Input**: Dataset filename (`movies_dataset.csv`)
+      - **Output**: `preprocess_output`
+      - **Description**: Python script that preprocesses the inputted dataset. It cleans names by adding the release year if a duplicate name is found. It cleans genres by filling any empty genres with 'unknown', cleaning any unnecessary characters (e.g. hyphens and underscores), and also keeping genres with spaces in them (e.g. "romantic comedy"). It cleans cast and directors by splitting on delimeters and saving them as lists. It cleans plot and summary by replacing newlines with spaces. It finally cleans languages by replacing any underscores with spaces and splitting on delimeters. These data are all stored into dictionaries, mapping an id -> attribute. There are also dictionaries for genre -> ids (all ids of a genre), and name -> id. The output of this python script is a folder: `preprocess_output`, which contains the pickle files of all the dictionaries created.
+- Create word embeddings for the plots and the summaries. To do this, run `python3 similarities.py`.
     - `similarities.py`:
+      - **Input**: None
+      - **Output**: `similarities_output`
+      - **Description**: Python script that...
+
+### Step 3a: Calculate Recommendations
+- From `eecs486-MovieRecommender/movrec/)` run `python3 calculate.py`. This will launch a command-line application to calculate recommendations for a queried movie. Follow the prompts of the app to receive recommendations.
+  - `calculate.py`:
+     - **Input**: None
+     - **Output**: None
+     - **Description**: Python script that...
+
+### Step 3b: Graphical User Interface for Recommendations
+- From `eecs486-MovieReocmmender/movrec/)` run `./bin/movrecrun`. This will launch a web server hosted on [localhost](http://localhost:8000) where you can interact with the recommender system through a user interface. You do not need to run `python3 calculate.py` before running the web servers.
+  - `front`: This server handles the front-end of the web application. This is where requests are made and how results are displayed.
+  - `recommend`: This server handles the back-end of the web application. This is where the calculations in `calculate.py` are done for the web application implementation.
 
