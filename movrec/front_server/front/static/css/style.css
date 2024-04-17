@@ -18,7 +18,7 @@
   font-size: 36px;
   line-height: 44px;
 
-  color: #FF60AC;
+  color: #83aff0;
 }
 
 .bolder {
@@ -46,32 +46,42 @@
   margin-left: 270px;
   width: 750px;
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.doc_title {
+.recommendation {
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.rec_title {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 26px;
   line-height: 30px;
 
-  color: #831349;
+  color: #2c456b;
 
   margin-top: 10px;
   padding-top: 10px;
 }
 
-.doc_url {
+.rec_details {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 12px;
-  line-height: 14px;
-  color: #FF60AC;
-  cursor: pointer;
+  font-size: 20px;
+  line-height: 22px;
+  color: #4779c4;
+  margin-top: 10px;
+  padding-top: 10px;
 }
 
-.doc_summary {
+.rec_summary {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
@@ -105,7 +115,7 @@ input[type=text] {
   background: #F8F8F8;
   border-color: transparent;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  outline-color: #E72A85;
+  outline-color: #83aff0;
 
   padding-left: 30px;
 
@@ -126,7 +136,7 @@ input[type=submit] {
   top: 64px;
 
   color: #FFFFFF;
-  background: #E72A85;
+  background: #83aff0;
   border-radius: 3px;
   border-color: transparent;
 
@@ -155,7 +165,7 @@ input[type=range]::-webkit-slider-runnable-track {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  background-color: #E72A90;
+  background-color: #83aff0;
   border: transparent;
   height: 16px;
   width: 16px;
@@ -169,7 +179,7 @@ input[type=range]:focus {
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background-color: #E72A90
+  background-color: #83aff0
 }
 
 input[type=range]::-moz-range-track {
@@ -181,7 +191,7 @@ input[type=range]::-moz-range-track {
 }
 
 input[type=range]::-moz-range-thumb {
-  background-color: #E72A90;
+  background-color: #83aff0;
   border: transparent;
   height: 16px;
   width: 16px;
@@ -196,13 +206,13 @@ input[type=range]:-moz-focusring {
 }
 
 input[type=range]::-moz-range-progress {
-  background-color: #E72A90;
+  background-color: #83aff0;
   width: 222px;
   appearance: none;
 }
 
 input[type=range]:focus::-moz-range-track {
-  background: #E72A90;
+  background: #83aff0;
 }
 
 #weights {

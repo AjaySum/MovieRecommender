@@ -60,7 +60,8 @@ def show_index():
     time.sleep(0.1)
     for thread in threads:
         thread.join()
-    context["recommend"] = films if films else []
+    print(films)
+    context["recommend"] = films[0] if films else []
     print(context)
     return flask.render_template("index.html", **context)
 

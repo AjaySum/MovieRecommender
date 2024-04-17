@@ -51,17 +51,19 @@
                         <div><input id="gwrange" type="range" name="g_w" min=1 max=5 step=1 value="{{g_w}}"/></div>
                     </div>
                 </div>
-                    
-
                 <input type="submit" value="Recommend"/>
             </form>
 
             <div class="docs">
                 {% if noresults %}
-                    <div class="no_results">No recommendations found!</div>
+                    <div class="noresults">No recommendations found!</div>
                 {% else %}
                     {% for recommendation in recommend %}
-                        <div class="film_title">{{recommendation}}</div>
+                        <div class="recommendation">
+                            <div class="rec_title"><b>{{recommendation.name}}</b></h2></div>
+                            <div class="rec_details"><b>Genres</b>: {{recommendation.genres}} | <b>Release Year</b>: {{recommendation.year}}</div>
+                            <div class="rec_summary">{{recommendation.summary}}</div>
+                        </div>
                     {% endfor %}
                 {% endif %}
             </div>

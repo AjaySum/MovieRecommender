@@ -56,7 +56,15 @@ def get_hits():
     if not this_c.findId(query):
         return flask.response(status=400)
     
-    context["recommend"] = this_c.calculateScore()
+    recommended_movies = this_c.calculateScore()
+
+    for movie, _ in recommended_movies:
+        context["recommend"].append({
+            "name": this_c.id_name[movie],
+            "year": this_c.id_year[movie],
+            "genres": ", ".join([genre.capitalize() for genre in this_c.id_genres[movie]]),
+            "summary": this_c.id_summary[movie]
+        })
     print(context)
 
     return flask.jsonify(**context)
