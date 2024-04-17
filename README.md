@@ -30,12 +30,15 @@ For a quick setup, follow these steps:
   - Install the Stanford Glove.6B Word Embeddings here: [glove.6B dataset](https://nlp.stanford.edu/data/glove.6B.zip). Unzip this directory to the repository root directory (`eecs486-MovieRecommender/`).
   - Create the virtual environment and download the required libraries. To do this, run `cd movrec` and run `python3 -m venv env` to create the environment. Then run `source env/bin/activate` to activate the environment and run `pip install -r requirements.txt`.
   - Install the dataset. To do this, run `python3 dataset.py`.
-      - `dataset.py`: Python script that uses the huggingface datasets library to download the Wikipedia Plot Data dataset.
+      - `dataset.py`:
+        - **Input**: None
+        - **Output**: `movies_dataset.csv`
+        - **Description**: Python script that uses the huggingface `datasets` library to download the Wikipedia Plot Data dataset.
 
 ### Step 2: Create Dictionaries and Calculate Word Embeddings
 -  From the movrec directory (`eecs486-MovieRecommender/movrec/`), parse, clean, and refactor the dataset into dictionaries. To do this, run `python3 preprocess.py`.
     - `preprocess.py`:
-      - **Input**: `Dataset filename`
+      - **Input**: Dataset filename (`movies_dataset.csv`)
       - **Output**: `preprocess_output`
       - **Description**: Python script that preprocesses the inputted dataset. It cleans names by adding the release year if a duplicate name is found. It cleans genres by filling any empty genres with 'unknown', cleaning any unnecessary characters (e.g. hyphens and underscores), and also keeping genres with spaces in them (e.g. "romantic comedy"). It cleans cast and directors by splitting on delimeters and saving them as lists. It cleans plot and summary by replacing newlines with spaces. It finally cleans languages by replacing any underscores with spaces and splitting on delimeters. These data are all stored into dictionaries, mapping an id -> attribute. There are also dictionaries for genre -> ids (all ids of a genre), and name -> id. The output of this python script is a folder: `preprocess_output`, which contains the pickle files of all the dictionaries created.
 - Create word embeddings for the plots and the summaries. To do this, run `python3 similarities.py`.
