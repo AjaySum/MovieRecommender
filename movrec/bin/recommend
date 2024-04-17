@@ -19,12 +19,14 @@ start () {
 		echo "Error: recommend server is already running"
 		exit 1
 	fi
+    echo "starting recommend server ..."
     mkdir -p var/log
     rm -f var/log/recommend.log
     flask --app recommend run --host 0.0.0.0 --port 9000 >> var/log/recommend.log 2>&1 &
 }
 
 stop () {
+    echo "stopping recommend server ..."
 	pkill -f "flask --app recommend run --host 0.0.0.0 --port 9000" || true
 }
 
