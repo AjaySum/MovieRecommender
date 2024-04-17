@@ -29,7 +29,9 @@ class Calculate():
     y_w = 0.05 # year weight
     g_w = 0.15 # genre weight
     
-    
+    constWeights = {"fp_w": 0.26, "s_w": 0.37, "d_w": 0.1, "c_w": 0.1, "y_w": 0.02, "g_w": 0.15}
+
+    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3}
     
     queryId = -1
 
@@ -37,6 +39,14 @@ class Calculate():
         # initialize all docs and queryStr
         self.queryStr = None
         self.queryId = -1
+    
+    def updateWeights(self):
+        self.fp_w = self.constWeights["fp_w"] + (self.currLev["fp_w"] - 3) * 0.15 * self.constWeights["fp_w"]
+        self.s_w = self.constWeights["s_w"] + (self.currLev["s_w"] - 3) * 0.15 * self.constWeights["s_w"]
+        self.d_w = self.constWeights["d_w"] + (self.currLev["d_w"] - 3) * 0.15 * self.constWeights["d_w"]
+        self.c_w = self.constWeights["c_w"] + (self.currLev["c_w"] - 3) * 0.15 * self.constWeights["c_w"]
+        self.y_w = self.constWeights["y_w"] + (self.currLev["y_w"] - 3) * 0.15 * self.constWeights["y_w"]
+        self.g_w = self.constWeights["g_w"] + (self.currLev["g_w"] - 3) * 0.15 * self.constWeights["g_w"]
 
     def factors(self):
         print("Scoring full plots...")

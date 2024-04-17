@@ -36,7 +36,7 @@ restart () {
 
 status () {
     set +o pipefail
-    NPROCS=$(pgrep -f "flask --app recommend run --host 0.0.0.0 --port 9000" | wc -l)
+    NPROCS=$(pgrep -f "flask --app recommend run --host 0.0.0.0 --port 9000 " | wc -l)
     set -o pipefail
     if [ "$NPROCS" -eq 1 ]; then
         echo "recommend server running"

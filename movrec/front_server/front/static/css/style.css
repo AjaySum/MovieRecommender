@@ -27,11 +27,8 @@
 }
 
 .pagerank_weight {
-  position: absolute;
-  width: 135px;
+  width: 200px;
   height: 14px;
-  left: 1146.5px;
-  top: 134px;
 
   font-family: Roboto;
   font-style: normal;
@@ -144,9 +141,6 @@ input[type=submit] {
 
 input[type=range] {
   -webkit-appearance: none;
-  position: absolute;
-  left: 1110px;
-  top: 180px;
   width: 222px;
 }
 
@@ -209,4 +203,17 @@ input[type=range]::-moz-range-progress {
 
 input[type=range]:focus::-moz-range-track {
   background: #E72A90;
+}
+
+#weights {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  width: 200px;
+  left: 1146.5px;
+  top: 134px;
+}
+
+.flex-item {
+  width: 200px;
 }
