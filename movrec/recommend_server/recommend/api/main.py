@@ -25,14 +25,14 @@ class Calculate():
 
     # set weights
     fp_w = 0.26 # full plot weight 
-    s_w = 0.37 # summary weight
+    s_w = 0.38 # summary weight
     d_w = 0.1 # director weight
-    c_w = 0.1 # cast weight
-    y_w = 0.02 # year weight
-    g_w = 0.15 # genre weight
-    l_w = 0.05 # language weight
+    c_w = 0.01 # cast weight
+    y_w = 0.05 # year weight
+    g_w = 0.1 # genre weight
+    l_w = 0.3 # language weight
     
-    constWeights = {"fp_w": 0.26, "s_w": 0.37, "d_w": 0.1, "c_w": 0.1, "y_w": 0.02, "g_w": 0.15, "l_w": 0.05}
+    constWeights = {"fp_w": 0.26, "s_w": 0.38, "d_w": 0.1, "c_w": 0.01, "y_w": 0.05, "g_w": 0.1, "l_w": 0.3}
 
     currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3, "l_w": 3}
     
