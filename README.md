@@ -42,7 +42,7 @@ For a quick setup, follow these steps:
   - `calculate.py`:
 
 ### Step 3b: Graphical User Interface for Recommendations
-- From `eecs486-MovieReocmmender/movrec/)` run `./bin/movrecrun`. This will launch a web server hosted on [localhost](http://localhost:8080) where you can interact with the recommender system through a user interface. You do not need to run `python3 calculate.py` before running the web servers.
+- From `eecs486-MovieReocmmender/movrec/)` run `./bin/movrecrun`. This will launch a web server hosted on [localhost](http://localhost:8000) where you can interact with the recommender system through a user interface. You do not need to run `python3 calculate.py` before running the web servers.
   - `front`: This server handles the front-end of the web application. This is where requests are made and how results are displayed.
   - `recommend`: This server handles the back-end of the web application. This is where the calculations in `calculate.py` are done for the web application implementation.
 
