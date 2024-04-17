@@ -22,5 +22,18 @@ This repository holds the code deliverables for Group 4's (Anisha Aggarwal, Shru
 
 For a quick setup, follow these steps:
 
-1. Install pre-trained word embeddings glove.6B from Stanford here: [glove.6B dataset](https://nlp.stanford.edu/data/glove.6B.zip). Move the unzipped directory to eecs486-MovieRecommender/.
+1. Install pre-trained word embeddings glove.6B from Stanford here: [glove.6B dataset](https://nlp.stanford.edu/data/glove.6B.zip). Move the unzipped directory to `eecs486-MovieRecommender/`.
 2. Run `./runall_cli.sh` for command-line interface, or `./runall_ui.sh` for GUI (access from [localhost:8000](http://localhost:8000))
+
+## Detailed Instructions: Manual Setup
+### Step 1: Initial Setup
+  - Install the Stanford Glove.6B Word Embeddings here: [glove.6B dataset](https://nlp.stanford.edu/data/glove.6B.zip). Unzip this directory to `eecs486-MovieRecommender/`.
+  - Then, we create the virtual environment and download the required libraries. To do this, run `cd movrec` and run `python3 -m venv env` to create the environment. Then run `source env/bin/activate` to activate the environment and run `pip install -r requirements.txt`.
+  - Then, we have to install the dataset. To do this, run `python3 dataset.py`.
+      - `dataset.py`: Python script that uses the huggingface datasets library to download the Wikipedia Plot Data dataset.
+
+### Step 2: Install the Dataset
+-  From the root (`eecs486-MovieRecommender/`), run `cd movrec` and then run `python3 dataset.py
+    - `preprocess.py`:
+    - `similarities.py`:
+
