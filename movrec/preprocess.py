@@ -100,9 +100,12 @@ class Preprocessor:
                 summaries.write(f"{index}|{row['PlotSummary']}\n")
                 fullplot.write(f"{index}|{row['Plot']}\n")
 
-                name_id[row['Title']] = index
+                name = row['Title']
+                if name in name_id:
+                    name += f" ({row['Release Year']})"
 
-                id_name[index] = row['Title']
+                name_id[name] = index
+                id_name[index] = name
                 
                 id_genres[index] = row['Genre']
 
