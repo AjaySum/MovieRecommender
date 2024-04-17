@@ -6,3 +6,4 @@ glove.6B
 .vector_cache
 .vector_cache/glove.6B.300d.txt.pt
 movrec/.DS_Store
+.DS_Store
