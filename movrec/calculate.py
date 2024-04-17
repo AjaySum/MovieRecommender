@@ -17,6 +17,7 @@ class Calculate():
     id_summary = {}
     summary_embeddings = {}
     fullplot_embeddings = {}
+    origin_language = {}
 
     # key: id2
     fullPlotScores = {}
@@ -31,10 +32,11 @@ class Calculate():
     c_w = 0.1 # cast weight
     y_w = 0.02 # year weight
     g_w = 0.15 # genre weight
+    l_w = 0.05 # language weight
 
-    constWeights = {"fp_w": 0.26, "s_w": 0.37, "d_w": 0.1, "c_w": 0.1, "y_w": 0.02, "g_w": 0.15}
+    constWeights = {"fp_w": 0.26, "s_w": 0.37, "d_w": 0.1, "c_w": 0.1, "y_w": 0.02, "g_w": 0.15, "l_w": 0.05}
 
-    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3}
+    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3, "l_w": 3}
     
     queryId = -1
 
@@ -52,6 +54,7 @@ class Calculate():
         self.c_w = self.constWeights["c_w"] + (self.currLev["c_w"] - 3) * 0.15 * self.constWeights["c_w"]
         self.y_w = self.constWeights["y_w"] + (self.currLev["y_w"] - 3) * 0.15 * self.constWeights["y_w"]
         self.g_w = self.constWeights["g_w"] + (self.currLev["g_w"] - 3) * 0.15 * self.constWeights["g_w"]
+        self.l_w = self.constWeights["l_w"] + (self.currLev["l_w"] - 3) * 0.15 * self.constWeights["l_w"]
 
     
     def factors(self):
@@ -73,6 +76,9 @@ class Calculate():
         self.genreScore()
         # get yr
         self.yrScoreCalc()
+        # get language
+        print("Scoring language...")
+        self.languageScore()
         print("Done scoring!")
 
 
@@ -133,6 +139,14 @@ class Calculate():
             union = query_genres.union(movie_genres)
             self.finalScores[movie_id] += self.g_w * (len(intersection) / len(union))
 
+    def languageScore(self):
+        query_language = set(self.origin_language[self.queryId])
+        for movie_id in self.finalScores:
+            movie_language = set(self.origin_language[movie_id])
+            intersection = query_language.intersection(movie_language)
+            union = query_language.union(movie_language)
+            self.finalScores[movie_id] += self.l_w * (len(intersection) / len(union))
+
 
     def readIn(self):
         # read in data into the dictionaries
@@ -162,6 +176,9 @@ class Calculate():
         
         with open('similarities_output/fullPlotEmbeddings.pkl', 'rb') as f:
             self.fullplot_embeddings = pickle.load(f)
+
+        with open('preprocess_output/origin_language.pkl', 'rb') as f:
+            self.origin_language = pickle.load(f)
 
 
     def calculateScore(self):
@@ -194,6 +211,7 @@ class Calculate():
         print(f"Cast weight: {self.currLev['c_w']}")
         print(f"Year weight: {self.currLev['fp_w']}")
         print(f"Genre weight: {self.currLev['g_w']}")
+        print(f"Language weight: {self.currLev['l_w']}")
         inp = 'x'
         while (inp != 'y' and inp != 'n'):
             inp = input("Do you want to adjust weights? (Y/N) ").strip().lower()
@@ -218,6 +236,9 @@ class Calculate():
             inp = input("Enter new 'Genre' weight between 1-5, or press any other character to skip: ")
             if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
                 self.currLev["g_w"] = int(inp)
+            inp = input("Enter new 'Language' weight between 1-5, or press any other character to skip: ")
+            if (inp.isdigit() and int(inp) > 0 and int(inp) < 6):
+                self.currLev["l_w"] = int(inp)
             self.updateWeights()
         return
             

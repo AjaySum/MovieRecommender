@@ -40,15 +40,21 @@ def clean_cast(cast_string):
         return split_cast
     return [s.strip() for s in filter(('').__ne__, split_cast)]
 
+
+def clean_language(language_string):
+    return language_string.split(', ')
+
+
 class Preprocessor:
     
     def __init__(self, movies_data):
         # initialize moviesData here
         self.movies_data = pd.read_csv(movies_data)
         self.movies_data.astype('object')
-
+        self.origin_language = {}
 
     def clean(self):
+        
         self.movies_data['Genre'] = self.movies_data['Genre'].fillna('unknown')
         self.movies_data['Genre'] = self.movies_data['Genre'].apply(lambda genre: clean_genre(genre))
 
@@ -63,6 +69,12 @@ class Preprocessor:
 
         self.movies_data['PlotSummary'] = self.movies_data['PlotSummary'].fillna('unknown')
         self.movies_data['PlotSummary'] = self.movies_data['PlotSummary'].apply(lambda summary: summary.replace("\n", " ").replace("\r", " "))
+
+        self.movies_data['Origin/Ethnicity'] = self.movies_data['Origin/Ethnicity'].fillna('unknown')
+        self.movies_data['Origin/Ethnicity'] = self.movies_data['Origin/Ethnicity'].apply(lambda language: clean_language(language))
+        
+        for index, row in self.movies_data.iterrows():
+            self.origin_language[index] = row['Origin/Ethnicity']
 
 
     def storeAll(self):
@@ -129,6 +141,16 @@ class Preprocessor:
         with open('preprocess_output/id_summary.pkl', 'wb') as pickle_file:
             pickle.dump(id_summary, pickle_file)
 
+        with open('preprocess_output/origin_language.pkl', 'wb') as pickle_file:
+            pickle.dump(self.origin_language, pickle_file)
+
+        with open('preprocess_output/origin_language.txt', 'w') as txt_file:
+            txt_file.write("id|origin_language\n")
+            for index, language in self.origin_language.items():
+                txt_file.write(f"{index}|{language}\n")
+
+
+
 
 def main():
     movies_csv = sys.argv[1]
@@ -138,7 +160,6 @@ def main():
     with open('top_genres.txt', 'w') as f:
         for genre, freq in sorted(genre_frequency.items(), key= lambda x: -x[1]):
             f.write(f"{genre} {freq}\n")
-
 
 if __name__ == "__main__":
     main()
