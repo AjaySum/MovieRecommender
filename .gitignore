@@ -1,9 +1,8 @@
-movrec/env/*
+movrec/env
 movrec/var/*
 front_server/front.egg-info/*
 recommend/recommend.egg-info/*
 glove.6B
 .vector_cache
 .vector_cache/glove.6B.300d.txt.pt
-env
 movrec/.DS_Store
