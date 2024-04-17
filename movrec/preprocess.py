@@ -42,7 +42,7 @@ def clean_cast(cast_string):
 
 
 def clean_language(language_string):
-    return language_string.split(', ')
+    return language_string.replace('_', ' ').split(', ')
 
 
 class Preprocessor:
