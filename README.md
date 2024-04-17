@@ -21,3 +21,6 @@ This repository holds the code deliverables for Group 4's (Anisha Aggarwal, Shru
 ## Getting Started: Quick Instructions
 
 For a quick setup, follow these steps:
+
+1. Install pre-trained word embeddings glove.6B from Stanford here: [glove.6B dataset](https://nlp.stanford.edu/data/glove.6B.zip). Move the unzipped directory to eecs486-MovieRecommender/.
+2. Run `./runall_cli.sh` for command-line interface, or `./runall_ui.sh` for GUI (access from [localhost:8000](http://localhost:8000))
