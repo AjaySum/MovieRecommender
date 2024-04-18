@@ -34,7 +34,7 @@ class Calculate():
     g_w = 0.1 # genre weight
     l_w = 0.3 # language weight
 
-    constWeights = {"fp_w": 0.26, "s_w": 0.38, "d_w": 0.1, "c_w": 0.01, "y_w": 0.05, "g_w": 0.1, "l_w": 0.3}
+    constWeights = {"fp_w": 0.36, "s_w": 0.48, "d_w": 0.15, "c_w": 0.05, "y_w": 0.05, "g_w": 0.3, "l_w": 0}
 
     currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3, "l_w": 3}
     
