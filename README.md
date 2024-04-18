@@ -41,11 +41,12 @@ For a quick setup, follow these steps:
       - **Input**: Dataset filename (`movies_dataset.csv`)
       - **Output**: `preprocess_output`
       - **Description**: Python script that preprocesses the inputted dataset. It cleans names by adding the release year if a duplicate name is found. It cleans genres by filling any empty genres with 'unknown', cleaning any unnecessary characters (e.g. hyphens and underscores), and also keeping genres with spaces in them (e.g. "romantic comedy"). It cleans cast and directors by splitting on delimeters and saving them as lists. It cleans plot and summary by replacing newlines with spaces. It finally cleans languages by replacing any underscores with spaces and splitting on delimeters. These data are all stored into dictionaries, mapping an id -> attribute. There are also dictionaries for genre -> ids (all ids of a genre), and name -> id. The output of this python script is a folder: `preprocess_output`, which contains the pickle files of all the dictionaries created.
+      
 - Create word embeddings for the plots and the summaries. To do this, run `python3 similarities.py`.
     - `similarities.py`:
       - **Input**: None
       - **Output**: `similarities_output`
-      - **Description**: Python script that...
+      - **Description**: Python script that takes in txt or csv files in format of id | description for the movie summary description and movie full plot description and creates embedding vectors based on the GloVe trained model. These filenames are specified in main() when the SimilarityCalculator() class constructor is called with parameters fullPlotsDoc and summariesDoc. The filenames can be changed by editing the parameter, and the script looks for the files inside the preprocess_output folder. It first tokenizes the words in the full plot and summary, and then creates a fixed size embedding Tensor. It then stores these embeddings into two dictionaries (one for summary embedding and one for full plot embedding). Both dictionaries use the id of the movie as the key. These two dictionaries are then saved as pickle objects for later use. 
 
 ### Step 3a: Calculate Recommendations
 - From `eecs486-MovieRecommender/movrec/)` run `python3 calculate.py`. This will launch a command-line application to calculate recommendations for a queried movie. Follow the prompts of the app to receive recommendations.
