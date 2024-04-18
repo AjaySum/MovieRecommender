@@ -38,7 +38,7 @@ For a quick setup, follow these steps:
 ### Step 2: Create Dictionaries and Calculate Word Embeddings
 -  From the movrec directory (`eecs486-MovieRecommender/movrec/`), parse, clean, and refactor the dataset into dictionaries. To do this, run `python3 preprocess.py`.
     - `preprocess.py`:
-      - **Input**: Dataset filename (`movies_dataset.csv`)
+      - **Input**: Dataset filename ([`movies_dataset.csv`](https://huggingface.co/datasets/vishnupriyavr/wiki-movie-plots-with-summaries))
       - **Output**: `preprocess_output`
       - **Description**: Python script that preprocesses the inputted dataset. It cleans names by adding the release year if a duplicate name is found. It cleans genres by filling any empty genres with 'unknown', cleaning any unnecessary characters (e.g. hyphens and underscores), and also keeping genres with spaces in them (e.g. "romantic comedy"). It cleans cast and directors by splitting on delimeters and saving them as lists. It cleans plot and summary by replacing newlines with spaces. It finally cleans languages by replacing any underscores with spaces and splitting on delimeters. These data are all stored into dictionaries, mapping an id -> attribute. There are also dictionaries for genre -> ids (all ids of a genre), and name -> id. The output of this python script is a folder: `preprocess_output`, which contains the pickle files of all the dictionaries created.
       
