@@ -7,9 +7,11 @@ import pandas as pd
 genre_frequency = {}
 
 def clean_genre(genre_string):
+    # Clean and split genres, updating frequencies
     global genre_frequency
     split_genre = re.split(", |,|/| /|-", genre_string)
     updated_split_genre = []
+    # Split each genre name into unique words and append to genre list
     for genre in split_genre:
         if ' ' in genre:
             words = genre.split(' ')
@@ -17,6 +19,7 @@ def clean_genre(genre_string):
                 updated_split_genre.append(word)
                 genre_frequency[word] = genre_frequency.get(word, 0) + 1
         else:
+            # Append genre names that do not contain spaces
             updated_split_genre.append(genre)
             genre_frequency[genre] = genre_frequency.get(genre, 0) + 1
             
