@@ -104,7 +104,7 @@ class Calculate():
             id2Directors = set(self.id_castdirector[id2]['director'])
             intersectionCast = id1Cast.intersection(id2Cast)
             intersectionDirectors = id1Directors.intersection(id2Directors)
-            self.finalScores[id2] += self.c_w * (len(intersectionCast)/len(id1Cast)) + self.d_w * (len(intersectionDirectors)/len(id2Cast))
+            self.finalScores[id2] += self.c_w * (len(intersectionCast)/len(id1Cast)) + self.d_w * (len(intersectionDirectors)/len(id1Directors))
 
     def encoding(self, vectorDict):
         answers = {}
