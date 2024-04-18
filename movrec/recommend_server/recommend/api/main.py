@@ -32,9 +32,9 @@ class Calculate():
     g_w = 0.1 # genre weight
     l_w = 0.3 # language weight
     
-    constWeights = {"fp_w": 0.26, "s_w": 0.38, "d_w": 0.1, "c_w": 0.01, "y_w": 0.05, "g_w": 0.1, "l_w": 0.3}
+    constWeights = {"fp_w": 0.26, "s_w": 0.38, "d_w": 0.1, "c_w": 0.01, "y_w": 0.05, "g_w": 0.1}
 
-    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3, "l_w": 3}
+    currLev = {"fp_w": 3, "s_w": 3, "d_w": 3, "c_w": 3, "y_w": 3, "g_w": 3}
     
     queryId = -1
 
@@ -50,7 +50,6 @@ class Calculate():
         self.c_w = self.constWeights["c_w"] + (self.currLev["c_w"] - 3) * 0.15 * self.constWeights["c_w"]
         self.y_w = self.constWeights["y_w"] + (self.currLev["y_w"] - 3) * 0.15 * self.constWeights["y_w"]
         self.g_w = self.constWeights["g_w"] + (self.currLev["g_w"] - 3) * 0.15 * self.constWeights["g_w"]
-        self.l_w = self.constWeights["l_w"] + (self.currLev["l_w"] - 3) * 0.15 * self.constWeights["l_w"]
 
     def factors(self):
         print("Scoring full plots...")

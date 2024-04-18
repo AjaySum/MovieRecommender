@@ -43,9 +43,9 @@ def show_index():
     if g_w is None:
         g_w = 3
 
-    l_w = flask.request.args.get('l_w')
-    if l_w is None:
-        l_w = 3
+    # l_w = flask.request.args.get('l_w')
+    # if l_w is None:
+    #     l_w = 3
     
     titles = []
     threads = []
@@ -58,13 +58,13 @@ def show_index():
         thread.join()
 
     print(titles)
-    context = {"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "l_w": l_w, "noresults": False, "titles":'| '.join(titles[0])}
+    context = {"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "noresults": False, "titles":'| '.join(titles[0])}
 
     # Create a thread for each index server
     threads = []
     films = []
     for api_url in front.app.config['SEARCH_INDEX_SEGMENT_API_URLS']:
-        thread = threading.Thread(target=request_index, args=(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w, l_w,))
+        thread = threading.Thread(target=request_index, args=(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w,))
         thread.start()
         threads.append(thread)
     # pass execution to the request_index function for a second
@@ -82,9 +82,9 @@ def request_titles(titles, api_url):
     if response.status_code == 200:
         titles.append(response.json()["titles"])
 
-def request_index(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w, l_w):
+def request_index(films, api_url, searchq, fp_w, s_w, d_w, c_w, y_w, g_w):
     """Send get requests to index servers and append results."""
-    response = requests.get(api_url, params={"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "l_w": l_w}, timeout=None)
+    response = requests.get(api_url, params={"q": searchq, "fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w}, timeout=None)
     # append dictionary to hits
     if response.status_code == 200:
         films.append(response.json()["recommend"])
