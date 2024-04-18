@@ -54,16 +54,12 @@ def get_hits():
     if g_w is None:
         return flask.Response(status=400)
     
-    l_w = int(flask.request.args.get('l_w', 3))
-    if l_w is None:
-        return flask.Response(status=400)
-    
     context = {
                 "recommend": []
             }
     
     this_c = recommend.api.c
-    this_c.currLev = {"fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w, "l_w": l_w}
+    this_c.currLev = {"fp_w": fp_w, "s_w": s_w, "d_w": d_w, "c_w": c_w, "y_w": y_w, "g_w": g_w}
     this_c.updateWeights()
     if not this_c.findId(query):
         return flask.response(status=400)

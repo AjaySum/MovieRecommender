@@ -16,8 +16,8 @@ const ywval = document.getElementById("ywval");
 const gwrange = document.getElementById("gwrange");
 const gwval = document.getElementById("gwval");
 
-const lwrange = document.getElementById("lwrange");
-const lwval = document.getElementById("lwval");
+// const lwrange = document.getElementById("lwrange");
+// const lwval = document.getElementById("lwval");
 
 
 fpwrange.addEventListener("input", () => {
@@ -44,9 +44,9 @@ gwrange.addEventListener("input", () => {
     gwval.innerHTML = gwrange.value;
 });
 
-lwrange.addEventListener("input", () => {
-    lwval.innerHTML = lwrange.value;
-});
+// lwrange.addEventListener("input", () => {
+//     lwval.innerHTML = lwrange.value;
+// });
 
 var split_movies = []
 function autofill_movies(movies) {
