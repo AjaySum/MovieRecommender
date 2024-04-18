@@ -4,8 +4,9 @@ import os
 import pickle
 import pandas as pd
 
-genre_frequency = {}
+genre_frequency = {} # word -> freq
 
+# function to clean genre
 def clean_genre(genre_string):
     # Clean and split genres, updating frequencies
     global genre_frequency
