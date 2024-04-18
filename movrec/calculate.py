@@ -32,7 +32,7 @@ class Calculate():
     c_w = 0.01 # cast weight
     y_w = 0.05 # year weight
     g_w = 0.1 # genre weight
-    l_w = 0.3 # language weight
+    l_w = 0.0 # language weight
 
     constWeights = {"fp_w": 0.36, "s_w": 0.48, "d_w": 0.15, "c_w": 0.05, "y_w": 0.05, "g_w": 0.3, "l_w": 0}
 
