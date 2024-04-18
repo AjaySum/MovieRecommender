@@ -49,7 +49,7 @@ For a quick setup, follow these steps:
       - **Description**: Python script that takes in txt or csv files in format of id | description for the movie summary description and movie full plot description and creates embedding vectors based on the GloVe trained model. These filenames are specified in main() when the SimilarityCalculator() class constructor is called with parameters fullPlotsDoc and summariesDoc. The filenames can be changed by editing the parameter, and the script looks for the files inside the preprocess_output folder. It first tokenizes the words in the full plot and summary, and then creates a fixed size embedding Tensor. It then stores these embeddings into two dictionaries (one for summary embedding and one for full plot embedding). Both dictionaries use the id of the movie as the key. These two dictionaries are then saved as pickle objects for later use. 
 
 ### Step 3a: Calculate Recommendations
-- From the movrec directory (`eecs486-MovieRecommender/movrec/)`) run `python3 calculate.py`. This will launch a command-line application to calculate recommendations for a queried movie. Follow the prompts of the app to receive recommendations.
+- From the movrec directory (`eecs486-MovieRecommender/movrec/`) run `python3 calculate.py`. This will launch a command-line application to calculate recommendations for a queried movie. Follow the prompts of the app to receive recommendations.
   - `calculate.py`:
      - **Input**: None
      - **Output**: None
