@@ -5,6 +5,7 @@ set -Eeuo pipefail
 set -x
 
 ./bin/install
+source env/bin/activate
 ./bin/recommend start
 until ./bin/front start
 do
