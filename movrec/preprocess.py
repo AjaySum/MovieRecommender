@@ -23,38 +23,54 @@ def clean_genre(genre_string):
     return [s.strip() for s in filter(('').__ne__, updated_split_genre)]
 
 
+# Function to clean the director strings.
 def clean_directors(directors_string):
     if directors_string == "Unknown":
         return ["unknown"]
+    
+    # Split director string on delimeters
     split_directors = re.split("\n|,\n|, |\r| & |Director: | and ", directors_string)
+    
+    # If there are no directors, then return the string
     if len(split_directors) == 1 and split_directors[0] == '':
         return split_directors
+    
+    # Otherwise, strip the strings and filter out the empty strings.
     return [s.strip() for s in filter(('').__ne__, split_directors)]
 
 
+# Function to clean the cast strings.
 def clean_cast(cast_string):
     if cast_string == "Unknown":
         return ["unknown"]
+    
+    # Split cast string on delimeters.
     split_cast = re.split("\n|,\n|, |\r| & |Cast: | and ", cast_string)
+
+    # If there is no cast, then return the string.
     if len(split_cast) == 1 and split_cast[0] == '':
         return split_cast
+    
+    # Otherwise, strip the strings and filter out the empty strings.
     return [s.strip() for s in filter(('').__ne__, split_cast)]
 
 
+# Clean the origin language string.
 def clean_language(language_string):
+    # Replace underscores with spaces and split on the ", " delimeter.
     return language_string.replace('_', ' ').split(', ')
 
 
 class Preprocessor:
     
     def __init__(self, movies_data):
-        # initialize moviesData here
+        # Read in the movies dataset.
         self.movies_data = pd.read_csv(movies_data)
         self.movies_data.astype('object')
         self.origin_language = {}
 
+    # Function that cleans the pandas dataframe.
     def clean(self):
-        
         self.movies_data['Genre'] = self.movies_data['Genre'].fillna('unknown')
         self.movies_data['Genre'] = self.movies_data['Genre'].apply(lambda genre: clean_genre(genre))
 
@@ -77,8 +93,8 @@ class Preprocessor:
             self.origin_language[index] = row['Origin/Ethnicity']
 
 
+    # Function to write to output dictionaries and csv files.
     def storeAll(self):
-        # loop through movieids and print id | title \n
         current_directory = os.getcwd()
         final_directory = os.path.join(current_directory, r'preprocess_output')
 
@@ -93,13 +109,18 @@ class Preprocessor:
 
         if not os.path.exists(final_directory):
             os.makedirs(final_directory)
+
+        # Open csv files.
         with open("preprocess_output/summaries.csv", 'w') as summaries, open("preprocess_output/fullplot.csv", 'w') as fullplot:
             summaries.write("id|summary\n")
             fullplot.write("id|fullplot\n")
             for index, row in self.movies_data.iterrows():
+
+                # Write to plot and summaries.
                 summaries.write(f"{index}|{row['PlotSummary']}\n")
                 fullplot.write(f"{index}|{row['Plot']}\n")
 
+                # Store data in dictionaries
                 name = row['Title']
                 if name in name_id:
                     name += f" ({row['Release Year']})"
@@ -151,9 +172,6 @@ class Preprocessor:
             txt_file.write("id|origin_language\n")
             for index, language in self.origin_language.items():
                 txt_file.write(f"{index}|{language}\n")
-
-
-
 
 def main():
     movies_csv = sys.argv[1]
