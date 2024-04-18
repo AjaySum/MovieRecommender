@@ -18,6 +18,9 @@ Consider the following scenario: you’ve just finished an amazing movie, someth
 
 This repository holds the code deliverables for Group 4's (Anisha Aggarwal, Shruti Jain, Ananya Menon, Ajay Sumanth, and Richard Wang) EECS 486 Info Retrieval Project at the University of Michigan.
 
+## Required Libraries
+All required libraries can be found in `eecs486-MovieRecommender/movrec/requirements.txt`.
+
 ## Getting Started: Quick Instructions
 
 For a quick setup, follow these steps:
