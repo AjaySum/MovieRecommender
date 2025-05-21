@@ -1,4 +1,6 @@
 # Movie Recommender
+### By: Anisha Aggarwal, Shruti Jain, Ananya Menon, Ajay Sumanth, and Richard Wang
+
 ![GitHub stars](https://img.shields.io/github/stars/AjaySum/eecs486-MovieRecommender?style=social)
 ![GitHub forks](https://img.shields.io/github/forks/AjaySum/eecs486-MovieRecommender?style=social)
 ![GitHub watchers](https://img.shields.io/github/watchers/AjaySum/eecs486-MovieRecommender)
